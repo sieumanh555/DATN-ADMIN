@@ -9,6 +9,7 @@ module.exports = {
     fontFamily: {
       outfit: ["Outfit", "sans-serif"],
     },
+    enableColorOpacity: true, // Bật hỗ trợ OKLCH
     screens: {
       "2xsm": "375px",
       xsm: "425px",

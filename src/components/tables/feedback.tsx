@@ -7,8 +7,7 @@ import {
   TableRow,
 } from "../ui/table";
 
-import Badge from "../ui/badge/Badge";
-import Image from "next/image";
+import { DocsIcon, TrashBinIcon } from "@/icons";
 
 interface Order {
   id: number;
@@ -120,6 +119,12 @@ export default function Feedback() {
             {/* Table Header */}
             <TableHeader className="border-b border-gray-100 dark:border-white/[0.05]">
               <TableRow>
+                                <TableCell
+                                  isHeader
+                                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                                >
+                                  STT 
+                                </TableCell>
                 <TableCell
                   isHeader
                   className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
@@ -176,6 +181,63 @@ export default function Feedback() {
                 </TableCell>
               </TableRow>
             </TableHeader>
+
+            <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05]">
+              {tableData.map((order) => (
+                <TableRow key={order.id}>
+                  <TableCell className="px-5 py-4 sm:px-6 text-start">
+                    <div className="flex items-center gap-3">
+                          1
+                    </div>
+                  </TableCell>
+                  <TableCell className="px-4 py-3 sm:px-6 text-start text-gray-500 text-theme-sm dark:text-gray-400">
+                    {order.projectName}
+                  </TableCell>
+                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
+                    <div className="flex -space-x-2">
+                     ABCXYZ
+                    </div>
+                  </TableCell>
+                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
+                    <div className="flex -space-x-2">
+                        asdasdasdas
+                      </div>
+                  </TableCell>
+                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
+                    <div className="flex -space-x-2">
+                     ABCXYZ
+                    </div>
+                  </TableCell>
+                  
+                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                    <div className="flex -space-x-2">
+                     ABCXYZ
+                    </div>
+                  </TableCell>
+                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
+                  <div className="flex -space-x-2">
+                     ABCXYZ
+                    </div>
+                  </TableCell>
+                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
+                  <div className="flex -space-x-2">
+                     ABCXYZ
+                    </div>
+                  </TableCell>
+                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
+                  <div className="flex -space-x-2">
+                     ABCXYZ
+                    </div>
+                  </TableCell>
+                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
+                    <div className="flex -space-x-2 gap-5">
+                      <DocsIcon className="cursor-pointer text-green-500"/>
+                      <TrashBinIcon className="cursor-pointer" />
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
 
             {/* Table Body
             <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05]">

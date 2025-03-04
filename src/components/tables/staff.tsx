@@ -7,6 +7,8 @@ import {
   TableRow,
 } from "../ui/table";
 
+import { UserCircleIcon, TrashBinIcon } from "@/icons";
+
 import Badge from "../ui/badge/Badge";
 import Image from "next/image";
 
@@ -111,7 +113,7 @@ const tableData: Order[] = [
   },
 ];
 
-export default function Staff() {
+export default function User() {
   return (
     <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
       <div className="max-w-full overflow-x-auto">
@@ -124,25 +126,31 @@ export default function Staff() {
                   isHeader
                   className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
                 >
-                  ProductID
+                  STT 
                 </TableCell>
                 <TableCell
                   isHeader
                   className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
                 >
-                  ProductName
+                  UsersID
                 </TableCell>
                 <TableCell
                   isHeader
                   className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
                 >
-                  Price
+                  UserName
                 </TableCell>
                 <TableCell
                   isHeader
                   className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
                 >
-                  PromotionalPrice 
+                  LastName
+                </TableCell>
+                <TableCell
+                  isHeader
+                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                >
+                  Email 
                 </TableCell>
                 <TableCell
                   isHeader
@@ -154,37 +162,55 @@ export default function Staff() {
                   isHeader
                   className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
                 >
-                  ImageChild
+                  Password
                 </TableCell>
                 <TableCell
                   isHeader
                   className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
                 >
-                  Des
+                  Address
                 </TableCell>
                 <TableCell
                   isHeader
                   className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
                 >
-                  Brand
+                  phoneNumber
                 </TableCell>
                 <TableCell
                   isHeader
                   className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
                 >
-                  Status
+                  birthday
                 </TableCell>
                 <TableCell
                   isHeader
                   className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
                 >
-                  CreationDate
+                  gender
                 </TableCell>
                 <TableCell
                   isHeader
                   className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
                 >
-                  UpdationDate
+                  status
+                </TableCell>
+                <TableCell
+                  isHeader
+                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                >
+                  Rank
+                </TableCell>
+                <TableCell
+                  isHeader
+                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                >
+                  registerDate
+                </TableCell>
+                <TableCell
+                  isHeader
+                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                >
+                  updationDate
                 </TableCell>
                 <TableCell
                   isHeader
@@ -195,52 +221,69 @@ export default function Staff() {
               </TableRow>
             </TableHeader>
 
-            {/* Table Body
             <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05]">
               {tableData.map((order) => (
                 <TableRow key={order.id}>
                   <TableCell className="px-5 py-4 sm:px-6 text-start">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 overflow-hidden rounded-full">
+                          1
+                    </div>
+                  </TableCell>
+                  <TableCell className="px-4 py-3 sm:px-6 text-start text-gray-500 text-theme-sm dark:text-gray-400">
+                    {order.projectName}
+                  </TableCell>
+                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
+                    <div className="flex -space-x-2">
+                     ABCXYZ
+                    </div>
+                  </TableCell>
+                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
+                    <div className="flex -space-x-2">
+                     ABCXYZ
+                    </div>
+                  </TableCell>
+                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
+                    <div className="flex -space-x-2">
+                     ABCXYZ
+                    </div>
+                  </TableCell>
+                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
+                    <div className="flex -space-x-2">
                         <Image
                           width={40}
                           height={40}
                           src={order.user.image}
                           alt={order.user.name}
                         />
-                      </div>
-                      <div>
-                        <span className="block font-medium text-gray-800 text-theme-sm dark:text-white/90">
-                          {order.user.name}
-                        </span>
-                        <span className="block text-gray-500 text-theme-xs dark:text-gray-400">
-                          {order.user.role}
-                        </span>
-                      </div>
                     </div>
                   </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.projectName}
+                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
+                  <div className="flex -space-x-2">
+                  ABCXYZ
+                    </div>
                   </TableCell>
                   <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
                     <div className="flex -space-x-2">
-                      {order.team.images.map((teamImage, index) => (
-                        <div
-                          key={index}
-                          className="w-6 h-6 overflow-hidden border-2 border-white rounded-full dark:border-gray-900"
-                        >
-                          <Image
-                            width={24}
-                            height={24}
-                            src={teamImage}
-                            alt={`Team member ${index + 1}`}
-                            className="w-full"
-                          />
-                        </div>
-                      ))}
+                     ABCXYZ
                     </div>
                   </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
+                    <div className="flex -space-x-2">
+                     ABCXYZ
+                    </div>
+                  </TableCell>
+                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
+                    <div className="flex -space-x-2">
+                     ABCXYZ
+                    </div>
+                  </TableCell>
+                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
+                    <div className="flex -space-x-2">
+                     ABCXYZ
+                    </div>
+                  </TableCell>
+                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
+                    <div className="flex -space-x-2">
                     <Badge
                       size="sm"
                       color={
@@ -253,13 +296,32 @@ export default function Staff() {
                     >
                       {order.status}
                     </Badge>
+                    </div>
                   </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-theme-sm dark:text-gray-400">
-                    {order.budget}
+                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
+                    <div className="flex -space-x-2">
+                     ABCXYZ
+                    </div>
+                  </TableCell>
+                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
+                    <div className="flex -space-x-2">
+                     ABCXYZ
+                    </div>
+                  </TableCell>
+                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
+                    <div className="flex -space-x-2">
+                     ABCXYZ
+                    </div>
+                  </TableCell>
+                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
+                    <div className="flex -space-x-2 gap-5">
+                      <UserCircleIcon className="cursor-pointer text-blue-500"/>
+                      <TrashBinIcon className="cursor-pointer" />
+                    </div>
                   </TableCell>
                 </TableRow>
               ))}
-            </TableBody> */}
+            </TableBody>
           </Table>
         </div>
       </div>
