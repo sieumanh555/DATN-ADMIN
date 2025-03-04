@@ -1,5 +1,6 @@
 "use client"
 import React, { useState }from "react";
+import Link from "next/link";
 import {
   Table,
   TableBody,
@@ -267,7 +268,9 @@ export default function Order() {
                   </TableCell>
                   <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
                     <div className="flex -space-x-2 gap-5">
-                      <EyeIcon className="cursor-pointer text-green-500"/>
+                      <Link href="/orderDetail">
+                        <EyeIcon className="cursor-pointer text-green-500" />
+                      </Link>
                       <TrashBinIcon className="cursor-pointer" />
                     </div>
                   </TableCell>
