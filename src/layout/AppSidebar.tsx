@@ -43,22 +43,62 @@ const navItems: NavItem[] = [
   },
 
   {
-    name: "Forms",
+    name: "Cập nhật hàng hóa",
     icon: <ListIcon />,
-    subItems: [{ name: "Form Elements", path: "/form-elements", pro: false }],
+    subItems: [ 
+      // { name: "Form mẫu 1", path: "/form-layout", pro: false },
+      // { name: "Form mẫu 2", path: "/form-elements", pro: false },
+      { name: "Product", path: "/product", pro: false },
+      { name: "Category", path: "/category", pro: false },
+      { name: "Order Detail", path: "/orderDetails", pro: false },
+      { name: "Staff Form", path: "/staff", pro: false },
+      { name: "User Form", path: "/user", pro: false },
+      { name: "Tin tức", path: "/news", pro: false },
+      { name: "Voucher", path: "/voucher", pro: false },
+    ],
   },
   {
-    name: "Tables",
+    name: "Danh sách hàng hóa",
     icon: <TableIcon />,
     subItems: [
       { name: "Quản lý sản phẩm", path: "/sanpham", pro: false },
       { name: "Quản lý danh mục", path: "/danhmuc", pro: false },
-      { name: "Tài khoản người dùng", path: "/user", pro: false },
-      { name: "Tài khoản nhân viên", path: "/staff", pro: false },
-      { name: "Quản lý đơn hàng", path: "/donhang", pro: false },
+    ],
+  },
+  {
+    name: "Danh sách tài khoản",
+    icon: <TableIcon />,
+    subItems: [
+      { name: "Tài khoản người dùng", path: "/tkkh", pro: false },
+      { name: "Tài khoản nhân viên", path: "/tknv", pro: false },
+    ],
+  },
+  {
+    name: "Danh sách Feedback",
+    icon: <TableIcon />,
+    subItems: [
+      { name: "Quản lý feedback", path: "/danhgia", pro: false },
+    ],
+  },
+  {
+    name: "Danh sách tin tức",
+    icon: <TableIcon />,
+    subItems: [
       { name: "Quản lý tin tức", path: "/tintuc", pro: false },
-      { name: "Quản lý feedback", path: "/feedback", pro: false },
-      { name: "Quản lý Voucher", path: "/voucher", pro: false },
+    ],
+  },
+  {
+    name: "Danh sách Voucher",
+    icon: <TableIcon />,
+    subItems: [
+      { name: "Quản lý Voucher", path: "/phieugiam", pro: false },
+    ],
+  },
+  {
+    name: "Danh sách đơn hàng",
+    icon: <TableIcon />,
+    subItems: [
+      { name: "Quản lý đơn hàng", path: "/donhang", pro: false },
     ],
   },
   {
