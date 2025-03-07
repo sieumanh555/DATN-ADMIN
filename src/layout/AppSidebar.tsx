@@ -13,6 +13,7 @@ import {
   BookOpenIcon,
   BanknotesIcon,
   UserCircleIcon,
+  BuildingOffice2Icon
 } from "@heroicons/react/24/solid";
 
 import {
@@ -108,6 +109,11 @@ const navItems: NavItem[] = [
     name: "Order Management",
     icon: <ShoppingBagIcon className="h-6 w-6" />,
     subItems: [{ name: "Order List", path: "/donhang", pro: false }],
+  },
+  {
+    name: "Supplier Management",
+    icon: <BuildingOffice2Icon className="h-6 w-6" />,
+    path: "/ncc",
   },
   // {
   //   name: "Pages",

@@ -1,16 +1,16 @@
 import ComponentCard from "@/components/common/ComponentCard";
 import PageBreadcrumb from "@/components/common/PageBreadCrumb";
-import Order from "@/components/tables/orderDetail";
+import Supplier from "@/components/tables/supplier";
 
 import React from "react";
 
-export default function SanPham() {
+export default function Ncc() {
   return (
     <div>
-      <PageBreadcrumb pageTitle="Halo-Shop" />
+      <PageBreadcrumb pageTitle="Task Kanban" />
       <div className="space-y-6">
         <ComponentCard title="Sản phẩm">
-          <Order />
+          <Supplier />
         </ComponentCard>
       </div>
     </div>

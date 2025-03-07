@@ -8,7 +8,7 @@ import React from "react";
 export default function Product() {
   return (
     <div>
-      <PageBreadcrumb pageTitle="Voucher" />
+      <PageBreadcrumb pageTitle="Voucher Management" />
       <div className="space-y-6">
         <ComponentCard title="Tìm kiếm hạn mức voucher">
           <VoucherAdd></VoucherAdd>
