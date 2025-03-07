@@ -12,14 +12,14 @@ export const metadata: Metadata = {
 
 export default function SignUp() {
   return (
-    <div className="relative flex w-full h-screen overflow-hidden bg-white z-1 dark:bg-gray-900">
+    <div className="relative z-1 flex h-screen w-full overflow-hidden bg-white dark:bg-gray-900">
       <SignUpForm />
-      <div className="relative items-center justify-center flex-1 hidden p-8 z-1 bg-brand-950 dark:bg-white/5 lg:flex">
+      <div className="relative z-1 hidden flex-1 items-center justify-center bg-brand-950 p-8 dark:bg-white/5 lg:flex">
         {/* <!-- ===== Common Grid Shape Start ===== --> */}
         <GridShape />
         {/* <!-- ===== Common Grid Shape End ===== --> */}
-        <div className="flex flex-col items-center max-w-xs">
-          <Link href="" className="block mb-4">
+        <div className="flex max-w-xs flex-col items-center">
+          <Link href="" className="mb-4 block">
             <Image
               src="/images/logo/auth-logo.svg"
               width={231}

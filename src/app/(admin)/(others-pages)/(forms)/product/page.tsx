@@ -20,17 +20,17 @@ export default function FormElements() {
           <Product />
         </div>
         <div className="space-y-6">
-          <Product2/>
+          <Product2 />
         </div>
       </div>
       <div className="col-span-full flex flex-col gap-5">
-            <Button className="w-full" size="sm" color="gray">
-                Decline
-            </Button>
-            <Button className="w-full" size="sm" color="green">
-                Accept
-            </Button>
-        </div>
+        <Button className="w-full" size="sm" color="gray">
+          Decline
+        </Button>
+        <Button className="w-full" size="sm" color="green">
+          Accept
+        </Button>
+      </div>
     </div>
   );
 }

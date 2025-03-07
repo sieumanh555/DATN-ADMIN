@@ -20,7 +20,7 @@ export default function Product() {
       <div className="space-y-6">
         <div>
           <Label>ProductID</Label>
-          <Input type="text" placeholder="info@gmail.com" disabled/>
+          <Input type="text" placeholder="info@gmail.com" disabled />
         </div>
         <div>
           <Label>ProductName</Label>

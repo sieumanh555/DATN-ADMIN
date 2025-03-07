@@ -48,7 +48,6 @@ const Input: FC<InputProps> = ({
     inputClasses += ` bg-transparent text-gray-800 border-gray-300 focus:border-brand-300 focus:ring focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:focus:border-brand-800`;
   }
 
-
   return (
     <div className="relative">
       <input
@@ -72,8 +71,8 @@ const Input: FC<InputProps> = ({
             error
               ? "text-error-500"
               : success
-              ? "text-success-500"
-              : "text-gray-500"
+                ? "text-success-500"
+                : "text-gray-500"
           }`}
         >
           {hint}

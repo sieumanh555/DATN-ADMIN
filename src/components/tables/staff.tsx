@@ -124,97 +124,97 @@ export default function User() {
               <TableRow>
                 <TableCell
                   isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
-                  STT 
+                  STT
                 </TableCell>
                 <TableCell
                   isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
                   UsersID
                 </TableCell>
                 <TableCell
                   isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
                   UserName
                 </TableCell>
                 <TableCell
                   isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
                   LastName
                 </TableCell>
                 <TableCell
                   isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
-                  Email 
+                  Email
                 </TableCell>
                 <TableCell
                   isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
                   Image
                 </TableCell>
                 <TableCell
                   isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
                   Password
                 </TableCell>
                 <TableCell
                   isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
                   Address
                 </TableCell>
                 <TableCell
                   isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
                   phoneNumber
                 </TableCell>
                 <TableCell
                   isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
                   birthday
                 </TableCell>
                 <TableCell
                   isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
                   gender
                 </TableCell>
                 <TableCell
                   isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
                   status
                 </TableCell>
                 <TableCell
                   isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
                   Rank
                 </TableCell>
                 <TableCell
                   isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
                   registerDate
                 </TableCell>
                 <TableCell
                   isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
                   updationDate
                 </TableCell>
                 <TableCell
                   isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
                   Controller
                 </TableCell>
@@ -224,98 +224,74 @@ export default function User() {
             <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05]">
               {tableData.map((order) => (
                 <TableRow key={order.id}>
-                  <TableCell className="px-5 py-4 sm:px-6 text-start">
-                    <div className="flex items-center gap-3">
-                          1
-                    </div>
+                  <TableCell className="px-5 py-4 text-start sm:px-6">
+                    <div className="flex items-center gap-3">1</div>
                   </TableCell>
-                  <TableCell className="px-4 py-3 sm:px-6 text-start text-gray-500 text-theme-sm dark:text-gray-400">
+                  <TableCell className="px-4 py-3 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
                     {order.projectName}
                   </TableCell>
-                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
+                  <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
+                    <div className="flex -space-x-2">ABCXYZ</div>
+                  </TableCell>
+                  <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
+                    <div className="flex -space-x-2">ABCXYZ</div>
+                  </TableCell>
+                  <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
+                    <div className="flex -space-x-2">ABCXYZ</div>
+                  </TableCell>
+                  <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
                     <div className="flex -space-x-2">
-                     ABCXYZ
+                      <Image
+                        width={40}
+                        height={40}
+                        src={order.user.image}
+                        alt={order.user.name}
+                      />
                     </div>
                   </TableCell>
-                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
+                  <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
+                    <div className="flex -space-x-2">ABCXYZ</div>
+                  </TableCell>
+                  <TableCell className="px-4 py-3 text-start text-theme-sm text-gray-500 dark:text-gray-400">
+                    <div className="flex -space-x-2">ABCXYZ</div>
+                  </TableCell>
+                  <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
+                    <div className="flex -space-x-2">ABCXYZ</div>
+                  </TableCell>
+                  <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
+                    <div className="flex -space-x-2">ABCXYZ</div>
+                  </TableCell>
+                  <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
+                    <div className="flex -space-x-2">ABCXYZ</div>
+                  </TableCell>
+                  <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
                     <div className="flex -space-x-2">
-                     ABCXYZ
+                      <Badge
+                        size="sm"
+                        color={
+                          order.status === "Active"
+                            ? "success"
+                            : order.status === "Pending"
+                              ? "warning"
+                              : "error"
+                        }
+                      >
+                        {order.status}
+                      </Badge>
                     </div>
                   </TableCell>
-                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
-                    <div className="flex -space-x-2">
-                     ABCXYZ
-                    </div>
+                  <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
+                    <div className="flex -space-x-2">ABCXYZ</div>
                   </TableCell>
-                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
-                    <div className="flex -space-x-2">
-                        <Image
-                          width={40}
-                          height={40}
-                          src={order.user.image}
-                          alt={order.user.name}
-                        />
-                    </div>
+                  <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
+                    <div className="flex -space-x-2">ABCXYZ</div>
                   </TableCell>
-                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
-                  <div className="flex -space-x-2">
-                  ABCXYZ
-                    </div>
+                  <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
+                    <div className="flex -space-x-2">ABCXYZ</div>
                   </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    <div className="flex -space-x-2">
-                     ABCXYZ
-                    </div>
-                  </TableCell>
-                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
-                    <div className="flex -space-x-2">
-                     ABCXYZ
-                    </div>
-                  </TableCell>
-                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
-                    <div className="flex -space-x-2">
-                     ABCXYZ
-                    </div>
-                  </TableCell>
-                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
-                    <div className="flex -space-x-2">
-                     ABCXYZ
-                    </div>
-                  </TableCell>
-                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
-                    <div className="flex -space-x-2">
-                    <Badge
-                      size="sm"
-                      color={
-                        order.status === "Active"
-                          ? "success"
-                          : order.status === "Pending"
-                          ? "warning"
-                          : "error"
-                      }
-                    >
-                      {order.status}
-                    </Badge>
-                    </div>
-                  </TableCell>
-                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
-                    <div className="flex -space-x-2">
-                     ABCXYZ
-                    </div>
-                  </TableCell>
-                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
-                    <div className="flex -space-x-2">
-                     ABCXYZ
-                    </div>
-                  </TableCell>
-                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
-                    <div className="flex -space-x-2">
-                     ABCXYZ
-                    </div>
-                  </TableCell>
-                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
-                    <div className="flex -space-x-2 gap-5">
-                      <UserCircleIcon className="cursor-pointer text-blue-500"/>
+                  <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
+                    <div className="flex gap-5 -space-x-2">
+                      <UserCircleIcon className="cursor-pointer text-blue-500" />
                       <TrashBinIcon className="cursor-pointer" />
                     </div>
                   </TableCell>

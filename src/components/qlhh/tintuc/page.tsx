@@ -5,7 +5,7 @@ import Label from "../../form/Label";
 import Input from "../../form/input/InputField";
 import Select from "../../form/Select";
 import Button from "@/components/ui/button/Button";
-import { CalenderIcon} from "../../../icons";
+import { CalenderIcon } from "../../../icons";
 import DropzoneComponent from "@/components/form/form-elements/DropZone";
 import FileInput from "@/components/form/input/FileInput";
 import TextArenHH from "@/components/form/form-elements/TextArenaHH";
@@ -23,7 +23,7 @@ export default function Tintuc() {
       <div className="space-y-6">
         <div>
           <Label>News ID</Label>
-          <Input type="text" placeholder="info@gmail.com" disabled/>
+          <Input type="text" placeholder="info@gmail.com" disabled />
         </div>
         <div>
           <Label>News Tittle</Label>
@@ -68,7 +68,7 @@ export default function Tintuc() {
               name="datePicker"
               onChange={(e) => console.log(e.target.value)}
             />
-            <span className="absolute text-gray-500 -translate-y-1/2 pointer-events-none right-3 top-1/2 dark:text-gray-400">
+            <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400">
               <CalenderIcon />
             </span>
           </div>
@@ -82,19 +82,19 @@ export default function Tintuc() {
               name="datePicker"
               onChange={(e) => console.log(e.target.value)}
             />
-            <span className="absolute text-gray-500 -translate-y-1/2 pointer-events-none right-3 top-1/2 dark:text-gray-400">
+            <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400">
               <CalenderIcon />
             </span>
           </div>
         </div>
-              <div className="col-span-full flex flex-col gap-5">
-                    <Button className="w-full" size="sm" color="gray">
-                        Decline
-                    </Button>
-                    <Button className="w-full" size="sm" color="green">
-                        Accept
-                    </Button>
-                </div>
+        <div className="col-span-full flex flex-col gap-5">
+          <Button className="w-full" size="sm" color="gray">
+            Decline
+          </Button>
+          <Button className="w-full" size="sm" color="green">
+            Accept
+          </Button>
+        </div>
       </div>
     </ComponentCard>
   );

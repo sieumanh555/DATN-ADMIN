@@ -122,107 +122,96 @@ export default function Categories() {
               <TableRow>
                 <TableCell
                   isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
-                  STT 
+                  STT
                 </TableCell>
                 <TableCell
                   isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
                   CategoryID
                 </TableCell>
                 <TableCell
                   isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
                   CategoryName
                 </TableCell>
                 <TableCell
                   isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
                   Status
                 </TableCell>
                 <TableCell
                   isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
                   parentID
                 </TableCell>
                 <TableCell
                   isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
                   CreationDate
                 </TableCell>
                 <TableCell
                   isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
                   UpdationDate
                 </TableCell>
                 <TableCell
                   isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
                   Controller
                 </TableCell>
               </TableRow>
             </TableHeader>
 
-
             <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05]">
               {tableData.map((order) => (
                 <TableRow key={order.id}>
-                  <TableCell className="px-5 py-4 sm:px-6 text-start">
-                    <div className="flex items-center gap-3">
-                          1
-                    </div>
+                  <TableCell className="px-5 py-4 text-start sm:px-6">
+                    <div className="flex items-center gap-3">1</div>
                   </TableCell>
-                  <TableCell className="px-4 py-3 sm:px-6 text-start text-gray-500 text-theme-sm dark:text-gray-400">
+                  <TableCell className="px-4 py-3 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
                     {order.projectName}
                   </TableCell>
-                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
-                    <div className="flex -space-x-2">
-                     ABCXYZ
-                    </div>
+                  <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
+                    <div className="flex -space-x-2">ABCXYZ</div>
                   </TableCell>
-                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
+                  <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
                     <div className="flex -space-x-2">
-                        <Badge
-                          size="sm"
-                          color={
-                            order.status === "Active"
-                              ? "success"
-                              : order.status === "Pending"
+                      <Badge
+                        size="sm"
+                        color={
+                          order.status === "Active"
+                            ? "success"
+                            : order.status === "Pending"
                               ? "warning"
                               : "error"
-                          }
-                        >
-                          {order.status}
-                        </Badge>
-                      </div>
-                  </TableCell>
-                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
-                    <div className="flex -space-x-2">
-                     ABCXYZ
+                        }
+                      >
+                        {order.status}
+                      </Badge>
                     </div>
                   </TableCell>
-                  
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    <div className="flex -space-x-2">
-                     ABCXYZ
-                    </div>
+                  <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
+                    <div className="flex -space-x-2">ABCXYZ</div>
                   </TableCell>
-                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
-                  <div className="flex -space-x-2">
-                     ABCXYZ
-                    </div>
+
+                  <TableCell className="px-4 py-3 text-start text-theme-sm text-gray-500 dark:text-gray-400">
+                    <div className="flex -space-x-2">ABCXYZ</div>
                   </TableCell>
-                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
-                    <div className="flex -space-x-2 gap-5">
-                      <DocsIcon className="cursor-pointer text-green-500"/>
+                  <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
+                    <div className="flex -space-x-2">ABCXYZ</div>
+                  </TableCell>
+                  <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
+                    <div className="flex gap-5 -space-x-2">
+                      <DocsIcon className="cursor-pointer text-green-500" />
                       <TrashBinIcon className="cursor-pointer" />
                     </div>
                   </TableCell>

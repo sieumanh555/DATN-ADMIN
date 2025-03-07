@@ -11,13 +11,13 @@ export const metadata: Metadata = {
 
 export default function SignIn() {
   return (
-    <div className="relative flex w-full h-screen px-4 py-6 overflow-hidden bg-white z-1 dark:bg-gray-900 sm:p-0">
+    <div className="relative z-1 flex h-screen w-full overflow-hidden bg-white px-4 py-6 dark:bg-gray-900 sm:p-0">
       <SignInForm />
-      <div className="relative items-center justify-center flex-1 hidden p-8 z-1 bg-brand-950 dark:bg-white/5 lg:flex">
+      <div className="relative z-1 hidden flex-1 items-center justify-center bg-brand-950 p-8 dark:bg-white/5 lg:flex">
         {/* <!-- ===== Common Grid Shape Start ===== --> */}
         <GridShape />
-        <div className="flex flex-col items-center max-w-xs">
-          <Link href="/" className="block mb-4">
+        <div className="flex max-w-xs flex-col items-center">
+          <Link href="/" className="mb-4 block">
             <Image
               width={231}
               height={48}

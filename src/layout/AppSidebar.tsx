@@ -1,21 +1,32 @@
 "use client";
-import React, { useEffect, useRef, useState,useCallback } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useSidebar } from "../context/SidebarContext";
-import { ChevronDownIcon } from "@heroicons/react/24/solid"
 import {
-  BoxCubeIcon,
-  CalenderIcon,
-  GridIcon,
-  HorizontaLDots,
-  ListIcon,
-  PageIcon,
-  PieChartIcon,
-  PlugInIcon,
-  TableIcon,
+  ChevronDownIcon,
+  ArrowTurnDownRightIcon,
+  ShoppingBagIcon,
+  CircleStackIcon,
+  ChatBubbleLeftRightIcon,
+  BookOpenIcon,
+  BanknotesIcon,
   UserCircleIcon,
+} from "@heroicons/react/24/solid";
+
+import {
+  // BoxCubeIcon,
+  // CalenderIcon,
+  // PaperPlaneIcon,
+  HorizontaLDots,
+  GridIcon,
+  // ListIcon,
+  // PageIcon,
+  PieChartIcon,
+  // PlugInIcon,
+  // TableIcon,
+  // UserCircleIcon,
 } from "../icons/index";
 
 type NavItem = {
@@ -29,117 +40,141 @@ const navItems: NavItem[] = [
   {
     icon: <GridIcon />,
     name: "Dashboard",
-    subItems: [{ name: "Thống kê", path: "/", pro: false }],
+    subItems: [{ name: "Statistics", path: "/", pro: false }],
   },
-  {
-    icon: <CalenderIcon />,
-    name: "Calendar",
-    path: "/calendar",
-  },
-  {
-    icon: <UserCircleIcon />,
-    name: "User Profile",
-    path: "/profile",
-  },
+  // {
+  //   icon: <CalenderIcon />,
+  //   name: "Calendar",
+  //   path: "/calendar",
+  // },
+  // {
+  //   icon: <UserCircleIcon />,
+  //   name: "User Profile",
+  //   path: "/profile",
+  // },
 
+  // {
+  //   name: "Cập nhật hàng hóa",
+  //   icon: <ListIcon />,
+  //   subItems: [
+  //     { name: "Form mẫu 1", path: "/form-layout", pro: false },
+  //     { name: "Form mẫu 2", path: "/form-elements", pro: false },
+  //     { name: "Order Detail", path: "/orderDetails", pro: false },
+  //   ],
+  // },
   {
-    name: "Cập nhật hàng hóa",
-    icon: <ListIcon />,
-    subItems: [ 
-      // { name: "Form mẫu 1", path: "/form-layout", pro: false },
-      // { name: "Form mẫu 2", path: "/form-elements", pro: false },
-      { name: "Product", path: "/product", pro: false },
-      { name: "Category", path: "/category", pro: false },
-      { name: "Order Detail", path: "/orderDetails", pro: false },
-      { name: "Staff Form", path: "/staff", pro: false },
-      { name: "User Form", path: "/user", pro: false },
-      { name: "Tin tức", path: "/news", pro: false },
-      { name: "Voucher", path: "/voucher", pro: false },
-    ],
-  },
-  {
-    name: "Danh sách hàng hóa",
-    icon: <TableIcon />,
+    name: "Product Management",
+    icon: <CircleStackIcon className="h-6 w-6" />,
     subItems: [
-      { name: "Quản lý sản phẩm", path: "/sanpham", pro: false },
-      { name: "Quản lý danh mục", path: "/danhmuc", pro: false },
+      { name: "Product List", path: "/sanpham", pro: false },
+      { name: "Categories List", path: "/danhmuc", pro: false },
+      { name: "Product Settings", path: "/product", pro: false },
+      { name: "Categories Settings", path: "/category", pro: false },
     ],
   },
   {
-    name: "Danh sách tài khoản",
-    icon: <TableIcon />,
+    name: "Account Management",
+    icon: <UserCircleIcon className="h-6 w-6" />,
     subItems: [
-      { name: "Tài khoản người dùng", path: "/tkkh", pro: false },
-      { name: "Tài khoản nhân viên", path: "/tknv", pro: false },
+      { name: "User Account", path: "/tkkh", pro: false },
+      { name: "Employee Account", path: "/tknv", pro: false },
+      { name: "Employee Account Settings", path: "/staff", pro: false },
+      { name: "User Account Settings", path: "/user", pro: false },
     ],
   },
   {
-    name: "Danh sách Feedback",
-    icon: <TableIcon />,
+    name: "Feedback Management",
+    icon: <ChatBubbleLeftRightIcon className="h-6 w-6" />,
+    subItems: [{ name: "Feedback List", path: "/danhgia", pro: false }],
+  },
+  {
+    name: "News List",
+    icon: <BookOpenIcon className="h-6 w-6" />,
     subItems: [
-      { name: "Quản lý feedback", path: "/danhgia", pro: false },
+      { name: "News Management", path: "/tintuc", pro: false },
+      { name: "News Settings", path: "/news", pro: false },
     ],
   },
   {
-    name: "Danh sách tin tức",
-    icon: <TableIcon />,
+    name: "Voucher List",
+    icon: <BanknotesIcon className="h-6 w-6" />,
     subItems: [
-      { name: "Quản lý tin tức", path: "/tintuc", pro: false },
+      { name: "Voucher Management", path: "/phieugiam", pro: false },
+      { name: "Voucher Settings", path: "/voucher", pro: false },
+      { name: "Discount Limit", path: "/discountLmit", pro: false },
     ],
   },
   {
-    name: "Danh sách Voucher",
-    icon: <TableIcon />,
-    subItems: [
-      { name: "Quản lý Voucher", path: "/phieugiam", pro: false },
-    ],
+    name: "Order Management",
+    icon: <ShoppingBagIcon className="h-6 w-6" />,
+    subItems: [{ name: "Order List", path: "/donhang", pro: false }],
   },
-  {
-    name: "Danh sách đơn hàng",
-    icon: <TableIcon />,
-    subItems: [
-      { name: "Quản lý đơn hàng", path: "/donhang", pro: false },
-    ],
-  },
-  {
-    name: "Pages",
-    icon: <PageIcon />,
-    subItems: [
-      { name: "Blank Page", path: "/blank", pro: false },
-      { name: "404 Error", path: "/error-404", pro: false },
-    ],
-  },
+  // {
+  //   name: "Pages",
+  //   icon: <ShoppingBagIcon />,
+  //   subItems: [
+  //     { name: "Blank Page", path: "/blank", pro: false },
+  //     { name: "404 Error", path: "/error-404", pro: false },
+  //   ],
+  // },
 ];
 
 const othersItems: NavItem[] = [
   {
     icon: <PieChartIcon />,
-    name: "Charts",
+    name: "Policies",
     subItems: [
-      { name: "Line Chart", path: "/line-chart", pro: false },
-      { name: "Bar Chart", path: "/bar-chart", pro: false },
+      { name: "Nhà nước", path: "/blanke", pro: false },
+      { name: "Công ty", path: "/blanka", pro: false },
+      { name: "Công lương", path: "/blankb", pro: false },
     ],
   },
   {
-    icon: <BoxCubeIcon />,
-    name: "UI Elements",
+    icon: <PieChartIcon />,
+    name: "Regulations",
     subItems: [
-      { name: "Alerts", path: "/alerts", pro: false },
-      { name: "Avatar", path: "/avatars", pro: false },
-      { name: "Badge", path: "/badge", pro: false },
-      { name: "Buttons", path: "/buttons", pro: false },
-      { name: "Images", path: "/images", pro: false },
-      { name: "Videos", path: "/videos", pro: false },
+      { name: "Công ty", path: "/blankc", pro: false },
+      { name: "Công tác", path: "/blankd", pro: false },
     ],
   },
   {
-    icon: <PlugInIcon />,
-    name: "Authentication",
-    subItems: [
-      { name: "Sign In", path: "/signin", pro: false },
-      { name: "Sign Up", path: "/signup", pro: false },
-    ],
+    icon: <PieChartIcon />,
+    name: "Support",
+    path: "/blank",
   },
+  {
+    icon: <PieChartIcon />,
+    name: "Setting",
+    path: "/blanks",
+  },
+  // {
+  //   icon: <PieChartIcon />,
+  //   name: "Charts",
+  //   subItems: [
+  //     { name: "Line Chart", path: "/line-chart", pro: false },
+  //     { name: "Bar Chart", path: "/bar-chart", pro: false },
+  //   ],
+  // },
+  // {
+  //   icon: <BoxCubeIcon />,
+  //   name: "UI Elements",
+  //   subItems: [
+  //     { name: "Alerts", path: "/alerts", pro: false },
+  //     { name: "Avatar", path: "/avatars", pro: false },
+  //     { name: "Badge", path: "/badge", pro: false },
+  //     { name: "Buttons", path: "/buttons", pro: false },
+  //     { name: "Images", path: "/images", pro: false },
+  //     { name: "Videos", path: "/videos", pro: false },
+  //   ],
+  // },
+  // {
+  //   icon: <PlugInIcon />,
+  //   name: "Authentication",
+  //   subItems: [
+  //     { name: "Sign In", path: "/signin", pro: false },
+  //     { name: "Sign Up", path: "/signup", pro: false },
+  //   ],
+  // },
 ];
 
 const AppSidebar: React.FC = () => {
@@ -148,7 +183,7 @@ const AppSidebar: React.FC = () => {
 
   const renderMenuItems = (
     navItems: NavItem[],
-    menuType: "main" | "others"
+    menuType: "main" | "others",
   ) => (
     <ul className="flex flex-col gap-4">
       {navItems.map((nav, index) => (
@@ -156,7 +191,7 @@ const AppSidebar: React.FC = () => {
           {nav.subItems ? (
             <button
               onClick={() => handleSubmenuToggle(index, menuType)}
-              className={`menu-item group  ${
+              className={`menu-item group ${
                 openSubmenu?.type === menuType && openSubmenu?.index === index
                   ? "menu-item-active"
                   : "menu-item-inactive"
@@ -168,7 +203,7 @@ const AppSidebar: React.FC = () => {
             >
               <span
                 className={` ${
-                  openSubmenu?.type === menuType && openSubmenu?.index === index
+                  openSubmenu?.type === menuType && openSubmenu?.index == index
                     ? "menu-item-icon-active"
                     : "menu-item-icon-inactive"
                 }`}
@@ -180,7 +215,7 @@ const AppSidebar: React.FC = () => {
               )}
               {(isExpanded || isHovered || isMobileOpen) && (
                 <ChevronDownIcon
-                  className={`ml-auto w-5 h-5 transition-transform duration-200  ${
+                  className={`ml-auto h-5 w-5 transition-transform duration-200 ${
                     openSubmenu?.type === menuType &&
                     openSubmenu?.index === index
                       ? "rotate-180 text-brand-500"
@@ -225,10 +260,10 @@ const AppSidebar: React.FC = () => {
                     : "0px",
               }}
             >
-              <ul className="mt-2 space-y-1 ml-9">
+              <ul className="ml-9 mt-2 space-y-1">
                 {nav.subItems.map((subItem) => (
                   <li key={subItem.name}>
-                    <Link 
+                    <Link
                       href={subItem.path}
                       className={`menu-dropdown-item ${
                         isActive(subItem.path)
@@ -236,15 +271,19 @@ const AppSidebar: React.FC = () => {
                           : "menu-dropdown-item-inactive"
                       }`}
                     >
+                      <ArrowTurnDownRightIcon
+                        width={24}
+                        height={24}
+                      ></ArrowTurnDownRightIcon>{" "}
                       {subItem.name}
-                      <span className="flex items-center gap-1 ml-auto">
+                      <span className="ml-auto flex items-center gap-1">
                         {subItem.new && (
                           <span
                             className={`ml-auto ${
                               isActive(subItem.path)
                                 ? "menu-dropdown-badge-active"
                                 : "menu-dropdown-badge-inactive"
-                            } menu-dropdown-badge `}
+                            } menu-dropdown-badge`}
                           >
                             new
                           </span>
@@ -255,7 +294,7 @@ const AppSidebar: React.FC = () => {
                               isActive(subItem.path)
                                 ? "menu-dropdown-badge-active"
                                 : "menu-dropdown-badge-inactive"
-                            } menu-dropdown-badge `}
+                            } menu-dropdown-badge`}
                           >
                             pro
                           </span>
@@ -277,12 +316,12 @@ const AppSidebar: React.FC = () => {
     index: number;
   } | null>(null);
   const [subMenuHeight, setSubMenuHeight] = useState<Record<string, number>>(
-    {}
+    {},
   );
   const subMenuRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   // const isActive = (path: string) => path === pathname;
-   const isActive = useCallback((path: string) => path === pathname, [pathname]);
+  const isActive = useCallback((path: string) => path === pathname, [pathname]);
 
   useEffect(() => {
     // Check if the current path matches any submenu item
@@ -308,7 +347,7 @@ const AppSidebar: React.FC = () => {
     if (!submenuMatched) {
       setOpenSubmenu(null);
     }
-  }, [pathname,isActive]);
+  }, [pathname, isActive]);
 
   useEffect(() => {
     // Set the height of the submenu items when the submenu is opened
@@ -338,21 +377,18 @@ const AppSidebar: React.FC = () => {
 
   return (
     <aside
-      className={`fixed mt-16 flex flex-col lg:mt-0 top-0 px-5 left-0 bg-white dark:bg-gray-900 dark:border-gray-800 text-gray-900 h-screen transition-all duration-300 ease-in-out z-50 border-r border-gray-200 
-        ${
-          isExpanded || isMobileOpen
-            ? "w-[290px]"
-            : isHovered
+      className={`fixed left-0 top-0 z-50 mt-16 flex h-screen flex-col border-r border-gray-200 bg-white px-5 text-gray-900 transition-all duration-300 ease-in-out dark:border-gray-800 dark:bg-gray-900 lg:mt-0 ${
+        isExpanded || isMobileOpen
+          ? "w-[290px]"
+          : isHovered
             ? "w-[290px]"
             : "w-[90px]"
-        }
-        ${isMobileOpen ? "translate-x-0" : "-translate-x-full"}
-        lg:translate-x-0`}
+      } ${isMobileOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0`}
       onMouseEnter={() => !isExpanded && setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <div
-        className={`py-8 flex  ${
+        className={`flex py-8 ${
           !isExpanded && !isHovered ? "lg:justify-center" : "justify-start"
         }`}
       >
@@ -384,12 +420,12 @@ const AppSidebar: React.FC = () => {
           )}
         </Link>
       </div>
-      <div className="flex flex-col overflow-y-auto duration-300 ease-linear no-scrollbar">
+      <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
         <nav className="mb-6">
           <div className="flex flex-col gap-4">
             <div>
               <h2
-                className={`mb-4 text-xs uppercase flex leading-[20px] text-gray-400 ${
+                className={`mb-4 flex text-xs uppercase leading-[20px] text-gray-400 ${
                   !isExpanded && !isHovered
                     ? "lg:justify-center"
                     : "justify-start"
@@ -406,7 +442,7 @@ const AppSidebar: React.FC = () => {
 
             <div className="">
               <h2
-                className={`mb-4 text-xs uppercase flex leading-[20px] text-gray-400 ${
+                className={`mb-4 flex text-xs uppercase leading-[20px] text-gray-400 ${
                   !isExpanded && !isHovered
                     ? "lg:justify-center"
                     : "justify-start"

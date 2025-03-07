@@ -1,5 +1,6 @@
 import PageBreadcrumb from "@/components/common/PageBreadCrumb";
 import Tintuc from "@/components/qlhh/tintuc/page";
+import Tintuc2 from "@/components/qlhh/tintuc/page2";
 import { Metadata } from "next";
 import React from "react";
 
@@ -16,6 +17,9 @@ export default function News() {
       <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
         <div className="space-y-6">
           <Tintuc />
+        </div>
+        <div className="space-y-6">
+          <Tintuc2 />
         </div>
       </div>
     </div>

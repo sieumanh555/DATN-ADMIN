@@ -4,7 +4,7 @@ import ComponentCard from "../../common/ComponentCard";
 import Label from "../../form/Label";
 import Input from "../../form/input/InputField";
 import Select from "../../form/Select";
-import { CalenderIcon} from "../../../icons";
+import { CalenderIcon } from "../../../icons";
 import DropzoneComponent from "@/components/form/form-elements/DropZone";
 import FileInput from "@/components/form/input/FileInput";
 
@@ -21,12 +21,12 @@ export default function Product2() {
     <ComponentCard title="Default Inputs">
       <div className="space-y-6">
         <div>
-            <Label>Image</Label>
-            <FileInput></FileInput>
+          <Label>Image</Label>
+          <FileInput></FileInput>
         </div>
         <div>
-            <Label>Child Image </Label>
-            <DropzoneComponent></DropzoneComponent>
+          <Label>Child Image </Label>
+          <DropzoneComponent></DropzoneComponent>
         </div>
         <div>
           <Label htmlFor="datePicker">Creation Date</Label>
@@ -37,7 +37,7 @@ export default function Product2() {
               name="datePicker"
               onChange={(e) => console.log(e.target.value)}
             />
-            <span className="absolute text-gray-500 -translate-y-1/2 pointer-events-none right-3 top-1/2 dark:text-gray-400">
+            <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400">
               <CalenderIcon />
             </span>
           </div>
@@ -51,7 +51,7 @@ export default function Product2() {
               name="datePicker"
               onChange={(e) => console.log(e.target.value)}
             />
-            <span className="absolute text-gray-500 -translate-y-1/2 pointer-events-none right-3 top-1/2 dark:text-gray-400">
+            <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400">
               <CalenderIcon />
             </span>
           </div>

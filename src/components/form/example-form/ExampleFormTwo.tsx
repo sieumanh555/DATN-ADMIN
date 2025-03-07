@@ -52,7 +52,7 @@ export default function ExampleFormTwo() {
       <Form onSubmit={handleSubmit}>
         <div className="grid gap-6 sm:grid-cols-2">
           <div className="col-span-full">
-            <h4 className="pb-4 text-base font-medium text-gray-800 border-b border-gray-200 dark:border-gray-800 dark:text-white/90">
+            <h4 className="border-b border-gray-200 pb-4 text-base font-medium text-gray-800 dark:border-gray-800 dark:text-white/90">
               Personal Info
             </h4>
           </div>
@@ -76,7 +76,7 @@ export default function ExampleFormTwo() {
           </div>
           <div className="col-span-2">
             <Label htmlFor="lastName">Date of Birth</Label>
-            <div className="relative w-full flatpickr-wrapper">
+            <div className="flatpickr-wrapper relative w-full">
               <Flatpickr
                 value={dateOfBirth} // Set the value to the state
                 onChange={handleDateChange} // Handle the date change
@@ -84,9 +84,9 @@ export default function ExampleFormTwo() {
                   dateFormat: "Y-m-d", // Set the date format
                 }}
                 placeholder="Select an option"
-                className="w-full py-2 pl-3 pr-10 text-sm border border-gray-300 rounded-md h-11 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+                className="h-11 w-full rounded-md border border-gray-300 py-2 pl-3 pr-10 text-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
               />
-              <span className="absolute text-gray-500 -translate-y-1/2 pointer-events-none right-3 top-1/2 dark:text-gray-400">
+              <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400">
                 <CalenderIcon />
               </span>
             </div>
@@ -102,7 +102,7 @@ export default function ExampleFormTwo() {
             />
           </div>
           <div className="col-span-2">
-            <h4 className="pb-4 text-base font-medium text-gray-800 border-b border-gray-200 dark:border-gray-800 dark:text-white/90">
+            <h4 className="border-b border-gray-200 pb-4 text-base font-medium text-gray-800 dark:border-gray-800 dark:text-white/90">
               Address
             </h4>
           </div>
@@ -132,7 +132,7 @@ export default function ExampleFormTwo() {
               className="bg-gray-50 dark:bg-gray-800"
             />
           </div>
-          <div className="flex items-center gap-3 col-span-full">
+          <div className="col-span-full flex items-center gap-3">
             <Label className="m-0">Membership:</Label>
             <div className="flex flex-wrap items-center gap-4">
               <Radio

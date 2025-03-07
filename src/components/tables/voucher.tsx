@@ -1,5 +1,5 @@
 "use client";
-import React,  { useState } from "react";
+import React, { useState } from "react";
 import {
   Table,
   TableBody,
@@ -10,8 +10,6 @@ import {
 
 import TextArea from "../form/input/TextArea";
 import { DocsIcon, TrashBinIcon } from "@/icons";
-
-
 
 import Badge from "../ui/badge/Badge";
 // import Image from "next/image";
@@ -118,14 +116,14 @@ const tableData: Order[] = [
 ];
 
 export default function Voucher() {
-    const [message, setMessage] = useState<{ [key: string]: string }>({});
-    const handleTextChange = (id: number, value: string) => {
-      setMessage((prev) => ({
-        ...prev,
-        [String(id)]: value, // Lưu message theo id của sản phẩm
-      }));
-    };
-    
+  const [message, setMessage] = useState<{ [key: string]: string }>({});
+  const handleTextChange = (id: number, value: string) => {
+    setMessage((prev) => ({
+      ...prev,
+      [String(id)]: value, // Lưu message theo id của sản phẩm
+    }));
+  };
+
   return (
     <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
       <div className="max-w-full overflow-x-auto">
@@ -136,132 +134,117 @@ export default function Voucher() {
               <TableRow>
                 <TableCell
                   isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
-                  STT 
+                  STT
                 </TableCell>
                 <TableCell
                   isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
-                  VoucherID 
+                  VoucherID
                 </TableCell>
                 <TableCell
                   isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
-                  VoucherCode 
+                  VoucherCode
                 </TableCell>
                 <TableCell
                   isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
-                  DiscountType 
+                  DiscountType
                 </TableCell>
                 <TableCell
                   isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
-                  DiscountValue  
+                  DiscountValue
                 </TableCell>
                 <TableCell
                   isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
-                  Description 
+                  Description
                 </TableCell>
                 <TableCell
                   isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
-                  Status 
+                  Status
                 </TableCell>
                 <TableCell
                   isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
-                  CreationDate 
+                  CreationDate
                 </TableCell>
                 <TableCell
                   isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
-                  UpdationDate 
+                  UpdationDate
                 </TableCell>
                 <TableCell
                   isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
                   Controller
                 </TableCell>
               </TableRow>
             </TableHeader>
 
-
-
-
             <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05]">
               {tableData.map((order) => (
                 <TableRow key={order.id}>
-                  <TableCell className="px-5 py-4 sm:px-6 text-start">
-                    <div className="flex items-center gap-3">
-                          1
-                    </div>
+                  <TableCell className="px-5 py-4 text-start sm:px-6">
+                    <div className="flex items-center gap-3">1</div>
                   </TableCell>
-                  <TableCell className="px-4 py-3 sm:px-6 text-start text-gray-500 text-theme-sm dark:text-gray-400">
+                  <TableCell className="px-4 py-3 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
                     {order.projectName}
                   </TableCell>
-                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
+                  <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
+                    <div className="flex -space-x-2">ABCXYZ</div>
+                  </TableCell>
+                  <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
+                    <div className="flex -space-x-2">ABCXYZ</div>
+                  </TableCell>
+                  <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
+                    <div className="flex -space-x-2">ABCXYZ</div>
+                  </TableCell>
+                  <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
                     <div className="flex -space-x-2">
-                     ABCXYZ
+                      <TextArea
+                        value={message[String(order.id)] || ""}
+                        onChange={(value) => handleTextChange(order.id, value)} // ✅ Đúng kiểu dữ liệu
+                        rows={1}
+                      />
                     </div>
                   </TableCell>
-                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
-                    <div className="flex -space-x-2">
-                     ABCXYZ
-                    </div>
-                  </TableCell>
-                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
-                    <div className="flex -space-x-2">
-                     ABCXYZ
-                    </div>
-                  </TableCell>
-                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
-                    <div className="flex -space-x-2">
-                            <TextArea
-                                  value={message[String(order.id)] || ""}
-                                  onChange={(value) => handleTextChange(order.id, value)} // ✅ Đúng kiểu dữ liệu
-                                  rows={1}
-                            />
-                    </div>
-                  </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                  <TableCell className="px-4 py-3 text-start text-theme-sm text-gray-500 dark:text-gray-400">
                     <Badge
                       size="sm"
                       color={
                         order.status === "Active"
                           ? "success"
                           : order.status === "Pending"
-                          ? "warning"
-                          : "error"
+                            ? "warning"
+                            : "error"
                       }
                     >
                       {order.status}
                     </Badge>
                   </TableCell>
-                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
-                    <div className="flex -space-x-2">
-                     ABCXYZ
-                    </div>
+                  <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
+                    <div className="flex -space-x-2">ABCXYZ</div>
                   </TableCell>
-                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
-                    <div className="flex -space-x-2">
-                     ABCXYZ
-                    </div>
+                  <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
+                    <div className="flex -space-x-2">ABCXYZ</div>
                   </TableCell>
-                  <TableCell className="px-5 py-4 sm:px-6 text-start  text-gray-500 text-theme-sm dark:text-gray-400">
-                    <div className="flex -space-x-2 gap-5">
-                      <DocsIcon className="cursor-pointer text-green-500"/>
+                  <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
+                    <div className="flex gap-5 -space-x-2">
+                      <DocsIcon className="cursor-pointer text-green-500" />
                       <TrashBinIcon className="cursor-pointer" />
                     </div>
                   </TableCell>

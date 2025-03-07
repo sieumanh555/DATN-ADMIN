@@ -8,8 +8,7 @@ import RecentOrders from "@/components/ecommerce/RecentOrders";
 import DemographicCard from "@/components/ecommerce/DemographicCard";
 
 export const metadata: Metadata = {
-  title:
-    "HaloShop E-commerce Dashboard",
+  title: "HaloShop E-commerce Dashboard",
   description: "Halo Shop - Web Bán Giày",
 };
 
