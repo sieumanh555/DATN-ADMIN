@@ -1,46 +1,73 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useModal } from "@/hooks/useModal";
 import { Modal } from "@/components/ui/modal";
 import Button from "@/components/ui/button/Button";
 import Input from "@/components/form/input/InputField";
 import Label from "@/components/form/Label";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
+import type { User } from "@/model/user_model";
+import { userService } from "@/services/user_controller";
 
 export default function UserMetaCard() {
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id"); // Lấy id từ URL query params
+
   const { isOpen, openModal, closeModal } = useModal();
   const handleSave = () => {
     // Handle save logic here
     console.log("Saving changes...");
     closeModal();
   };
+
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    if (!id) return;
+
+    setLoading(true);
+    userService
+      .getUser(id)
+      .then((response) => {
+        setUser(response); // Đặt dữ liệu vào state
+      })
+      .catch((error) => console.error("Lỗi khi lấy user:", error))
+      .finally(() => setLoading(false));
+  }, [id]);
+
+  console.log(user);
+
+  if (!id) return <p>Không tìm thấy ID sản phẩm</p>;
+  if (loading) return <p>Đang tải...</p>;
+
   return (
     <>
       <div className="rounded-2xl border border-gray-200 p-5 dark:border-gray-800 lg:p-6">
         <div className="flex flex-col gap-5 xl:flex-row xl:items-center xl:justify-between">
           <div className="flex w-full flex-col items-center gap-6 xl:flex-row">
-            <div className="h-20 w-20 overflow-hidden rounded-full border border-gray-200 dark:border-gray-800">
-              <Image
-                width={80}
-                height={80}
-                src="/images/user/owner.jpg"
-                alt="user"
-              />
-            </div>
-            <div className="order-3 xl:order-2">
-              <h4 className="mb-2 text-center text-lg font-semibold text-gray-800 dark:text-white/90 xl:text-left">
-                Musharof Chowdhury
-              </h4>
-              <div className="flex flex-col items-center gap-1 text-center xl:flex-row xl:gap-3 xl:text-left">
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  Team Manager
-                </p>
-                <div className="hidden h-3.5 w-px bg-gray-300 dark:bg-gray-700 xl:block"></div>
-                <p className="text-sm text-green-500 dark:text-gray-400">
-                  Status
-                </p>
+            {user && (
+              <div className="h-20 w-20 overflow-hidden rounded-full border border-gray-200 dark:border-gray-800">
+                <Image width={80} height={80} src={user.image} alt="user" />
               </div>
-            </div>
+            )}
+            {user && (
+              <div className="order-3 xl:order-2">
+                <h4 className="mb-2 text-center text-lg font-semibold text-gray-800 dark:text-white/90 xl:text-left">
+                  {user.firstname + "" + user.lastname}
+                </h4>
+                <div className="flex flex-col items-center gap-1 text-center xl:flex-row xl:gap-3 xl:text-left">
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    {user.role === 2 ? "General Admin" : "Khách hàng"}
+                  </p>
+                  <div className="hidden h-3.5 w-px bg-gray-300 dark:bg-gray-700 xl:block"></div>
+                  <p className="text-sm text-green-500 dark:text-gray-400">
+                    {user.status}
+                  </p>
+                </div>
+              </div>
+            )}
             <div className="order-2 flex grow items-center gap-2 xl:order-3 xl:justify-end">
               <button className="flex h-11 w-11 items-center justify-center gap-2 rounded-full border border-gray-300 bg-white text-sm font-medium text-gray-700 shadow-theme-xs hover:bg-gray-50 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03] dark:hover:text-gray-200">
                 <svg
@@ -108,7 +135,7 @@ export default function UserMetaCard() {
             </div>
           </div>
           <button
-            onClick={openModal}
+            onClick={() => openModal(user?._id)}
             className="flex w-full items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-700 shadow-theme-xs hover:bg-gray-50 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03] dark:hover:text-gray-200 lg:inline-flex lg:w-auto"
           >
             <svg
@@ -176,37 +203,9 @@ export default function UserMetaCard() {
                       defaultValue="https://instagram.com/PimjoHQ"
                     />
                   </div>
-                </div>
-              </div>
-              <div className="mt-7">
-                <h5 className="mb-5 text-lg font-medium text-gray-800 dark:text-white/90 lg:mb-6">
-                  Personal Information
-                </h5>
-
-                <div className="grid grid-cols-1 gap-x-6 gap-y-5 lg:grid-cols-2">
-                  <div className="col-span-2 lg:col-span-1">
-                    <Label>First Name</Label>
-                    <Input type="text" defaultValue="Musharof" />
-                  </div>
-
-                  <div className="col-span-2 lg:col-span-1">
-                    <Label>Last Name</Label>
-                    <Input type="text" defaultValue="Chowdhury" />
-                  </div>
-
-                  <div className="col-span-2 lg:col-span-1">
-                    <Label>Email Address</Label>
-                    <Input type="text" defaultValue="randomuser@pimjo.com" />
-                  </div>
-
-                  <div className="col-span-2 lg:col-span-1">
-                    <Label>Phone</Label>
-                    <Input type="text" defaultValue="+09 363 398 46" />
-                  </div>
-
                   <div className="col-span-2">
-                    <Label>Bio</Label>
-                    <Input type="text" defaultValue="Team Manager" />
+                    <Label>Image</Label>
+                    <Input type="text" defaultValue={user?.image} />
                   </div>
                 </div>
               </div>

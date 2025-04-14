@@ -1,20 +1,29 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import ComponentCard from "../../common/ComponentCard";
 import TextArea from "../input/TextArea";
 
-export default function TextArenaHH() {
-  const [messageTwo, setMessageTwo] = useState("");
+interface TextArenaHHProps {
+  value?: string;
+  rows?: number;
+  onChange?: (value: string) => void;
+}
+
+export default function TextArenaHH({
+  value = "",
+  rows = 6,
+  onChange,
+}: TextArenaHHProps) {
   return (
     <ComponentCard title="Data">
       <div className="space-y-6">
         <div>
           <TextArea
-            rows={6}
-            value={messageTwo}
-            error
-            onChange={(value) => setMessageTwo(value)}
-            hint="Please enter a valid message."
+            rows={rows}
+            value={value}
+            error={!value}
+            onChange={(event) => onChange?.(event)}
+            hint={!value ? "Please enter a valid message." : ""}
           />
         </div>
       </div>

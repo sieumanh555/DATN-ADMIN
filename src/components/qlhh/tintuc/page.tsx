@@ -8,7 +8,7 @@ import Button from "@/components/ui/button/Button";
 import { CalenderIcon } from "../../../icons";
 import DropzoneComponent from "@/components/form/form-elements/DropZone";
 import FileInput from "@/components/form/input/FileInput";
-import TextArenHH from "@/components/form/form-elements/TextArenaHH";
+import TextAreaNews from "@/components/form/input/TextArenaNews";
 export default function Tintuc() {
   const options = [
     { value: "marketing", label: "Marketing" },
@@ -31,7 +31,7 @@ export default function Tintuc() {
         </div>
         <div>
           <Label>Content</Label>
-          <TextArenHH />
+          <TextAreaNews />
         </div>
         <div>
           <Label>Image</Label>

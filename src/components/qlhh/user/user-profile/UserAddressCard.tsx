@@ -1,18 +1,40 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useModal } from "@/hooks/useModal";
 import { Modal } from "@/components/ui/modal";
 import Button from "@/components/ui/button/Button";
 import Input from "@/components/form/input/InputField";
 import Label from "@/components/form/Label";
+import { useSearchParams } from "next/navigation";
+import type { User } from "@/model/user_model";
+import { userService } from "@/services/user_controller";
 
 export default function UserAddressCard() {
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id"); // Lấy id từ URL query params
   const { isOpen, openModal, closeModal } = useModal();
   const handleSave = () => {
     // Handle save logic here
     console.log("Saving changes...");
     closeModal();
   };
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    if (!id) return;
+
+    setLoading(true);
+    userService
+      .getUser(id)
+      .then((response) => {
+        setUser(response); // Đặt dữ liệu vào state
+      })
+      .catch((error) => console.error("Lỗi khi lấy user:", error))
+      .finally(() => setLoading(false));
+  }, [id]);
+  if (!id) return <p>Không tìm thấy ID sản phẩm</p>;
+  if (loading) return <p>Đang tải...</p>;
   return (
     <>
       <div className="rounded-2xl border border-gray-200 p-5 dark:border-gray-800 lg:p-6">
@@ -21,48 +43,49 @@ export default function UserAddressCard() {
             <h4 className="text-lg font-semibold text-gray-800 dark:text-white/90 lg:mb-6">
               Address
             </h4>
+            {user && (
+              <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-7 2xl:gap-x-32">
+                <div>
+                  <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
+                    Country
+                  </p>
+                  <p className="text-sm font-medium text-gray-800 dark:text-white/90">
+                    {user.address}
+                  </p>
+                </div>
 
-            <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-7 2xl:gap-x-32">
-              <div>
-                <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
-                  Country
-                </p>
-                <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                  United States
-                </p>
-              </div>
+                <div>
+                  <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
+                    City/State
+                  </p>
+                  <p className="text-sm font-medium text-gray-800 dark:text-white/90">
+                    {user.address}
+                  </p>
+                </div>
 
-              <div>
-                <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
-                  City/State
-                </p>
-                <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                  Phoenix, Arizona, United States.
-                </p>
-              </div>
+                <div>
+                  <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
+                    Postal Code
+                  </p>
+                  <p className="text-sm font-medium text-gray-800 dark:text-white/90">
+                    {user.zipcode}
+                  </p>
+                </div>
 
-              <div>
-                <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
-                  Postal Code
-                </p>
-                <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                  ERT 2489
-                </p>
+                <div>
+                  <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
+                    TAX ID
+                  </p>
+                  <p className="text-sm font-medium text-gray-800 dark:text-white/90">
+                    {user.zipcode}
+                  </p>
+                </div>
               </div>
-
-              <div>
-                <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
-                  TAX ID
-                </p>
-                <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                  AS4568384
-                </p>
-              </div>
-            </div>
+            )}
           </div>
 
           <button
-            onClick={openModal}
+            onClick={() => openModal(user?._id)}
             className="flex w-full items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-700 shadow-theme-xs hover:bg-gray-50 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03] dark:hover:text-gray-200 lg:inline-flex lg:w-auto"
           >
             <svg
@@ -99,22 +122,21 @@ export default function UserAddressCard() {
               <div className="grid grid-cols-1 gap-x-6 gap-y-5 lg:grid-cols-2">
                 <div>
                   <Label>Country</Label>
-                  <Input type="text" defaultValue="United States" />
+                  <Input type="text" defaultValue={user?.address} />
                 </div>
 
                 <div>
                   <Label>City/State</Label>
-                  <Input type="text" defaultValue="Arizona, United States." />
+                  <Input type="text" defaultValue={user?.address} />
                 </div>
 
                 <div>
                   <Label>Postal Code</Label>
-                  <Input type="text" defaultValue="ERT 2489" />
+                  <Input type="text" defaultValue={user?.zipcode} />
                 </div>
-
                 <div>
                   <Label>TAX ID</Label>
-                  <Input type="text" defaultValue="AS4568384" />
+                  <Input type="text" defaultValue={user?.zipcode} />
                 </div>
               </div>
             </div>

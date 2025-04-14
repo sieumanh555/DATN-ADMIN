@@ -206,8 +206,13 @@ export default function Order() {
                   <TableCell className="px-5 py-4 text-start sm:px-6">
                     <div className="flex items-center gap-3">1</div>
                   </TableCell>
-                  <TableCell className="px-4 py-3 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
-                    {order.projectName}
+                  <TableCell className="px-4 py-3 text-start text-theme-sm text-gray-500 underline dark:text-gray-400 sm:px-6">
+                    <Link
+                      href="/spvariant"
+                      className="font-medium text-blue-600 hover:underline dark:text-blue-500"
+                    >
+                      {order.projectName}
+                    </Link>
                   </TableCell>
                   <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
                     <div className="flex -space-x-2">ABCXYZ</div>

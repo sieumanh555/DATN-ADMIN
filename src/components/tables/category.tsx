@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -9,109 +10,37 @@ import {
 
 import Badge from "../ui/badge/Badge";
 import { DocsIcon, TrashBinIcon } from "@/icons";
+import { categoryService } from "@/services/categories_controller";
+import type { Categories } from "@/model/categories_model";
 
-interface Order {
-  id: number;
-  user: {
-    image: string;
-    name: string;
-    role: string;
-  };
-  projectName: string;
-  team: {
-    images: string[];
-  };
-  status: string;
-  budget: string;
-}
-
-// Define the table data using the interface
-const tableData: Order[] = [
-  {
-    id: 1,
-    user: {
-      image: "/images/user/user-17.jpg",
-      name: "Lindsey Curtis",
-      role: "Web Designer",
-    },
-    projectName: "Agency Website",
-    team: {
-      images: [
-        "/images/user/user-22.jpg",
-        "/images/user/user-23.jpg",
-        "/images/user/user-24.jpg",
-      ],
-    },
-    budget: "3.9K",
-    status: "Active",
-  },
-  {
-    id: 2,
-    user: {
-      image: "/images/user/user-18.jpg",
-      name: "Kaiya George",
-      role: "Project Manager",
-    },
-    projectName: "Technology",
-    team: {
-      images: ["/images/user/user-25.jpg", "/images/user/user-26.jpg"],
-    },
-    budget: "24.9K",
-    status: "Pending",
-  },
-  {
-    id: 3,
-    user: {
-      image: "/images/user/user-17.jpg",
-      name: "Zain Geidt",
-      role: "Content Writing",
-    },
-    projectName: "Blog Writing",
-    team: {
-      images: ["/images/user/user-27.jpg"],
-    },
-    budget: "12.7K",
-    status: "Active",
-  },
-  {
-    id: 4,
-    user: {
-      image: "/images/user/user-20.jpg",
-      name: "Abram Schleifer",
-      role: "Digital Marketer",
-    },
-    projectName: "Social Media",
-    team: {
-      images: [
-        "/images/user/user-28.jpg",
-        "/images/user/user-29.jpg",
-        "/images/user/user-30.jpg",
-      ],
-    },
-    budget: "2.8K",
-    status: "Cancel",
-  },
-  {
-    id: 5,
-    user: {
-      image: "/images/user/user-21.jpg",
-      name: "Carla George",
-      role: "Front-end Developer",
-    },
-    projectName: "Website",
-    team: {
-      images: [
-        "/images/user/user-31.jpg",
-        "/images/user/user-32.jpg",
-        "/images/user/user-33.jpg",
-      ],
-    },
-    budget: "4.5K",
-    status: "Active",
-  },
-];
+import { format } from "date-fns";
+import { vi } from "date-fns/locale"; // Import locale nếu cần
+import Link from "next/link";
 
 export default function Categories() {
+  const [categories, setCategories] = useState<Categories[]>([]);
+  useEffect(() => {
+    categoryService.getAllCategory().then(setCategories);
+  }, []);
+  const handleDelete = async (id: string) => {
+    if (!id) {
+      alert("ID không hợp lệ.");
+      return;
+    }
+    try {
+      const confirmDelete = confirm("Bạn có chắc muốn xóa danh mục này?");
+      if (!confirmDelete) return;
+      const response = await categoryService.deleteCategory(id);
+      if (response.status === 200) {
+        alert("Xóa danh mục thành công!");
+        window.location.reload();
+      }
+    } catch (error) {
+      console.error("Lỗi khi xóa danh mục:", error);
+      alert("Xóa danh mục thất bại. Vì danh mục này đang có sản phẩm tồn tại.");
+      window.location.reload();
+    }
+  };
   return (
     <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
       <div className="max-w-full overflow-x-auto">
@@ -148,12 +77,6 @@ export default function Categories() {
                   isHeader
                   className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
-                  parentID
-                </TableCell>
-                <TableCell
-                  isHeader
-                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
-                >
                   CreationDate
                 </TableCell>
                 <TableCell
@@ -172,118 +95,61 @@ export default function Categories() {
             </TableHeader>
 
             <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05]">
-              {tableData.map((order) => (
-                <TableRow key={order.id}>
+              {categories.map((items, index) => (
+                <TableRow key={items._id}>
                   <TableCell className="px-5 py-4 text-start sm:px-6">
-                    <div className="flex items-center gap-3">1</div>
+                    <div className="flex items-center gap-3">{index + 1}</div>
                   </TableCell>
                   <TableCell className="px-4 py-3 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
-                    {order.projectName}
+                    {items.sku_id}
                   </TableCell>
-                  <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
-                    <div className="flex -space-x-2">ABCXYZ</div>
+                  <TableCell className="px-4 py-3 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
+                    {items.name}
                   </TableCell>
                   <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
                     <div className="flex -space-x-2">
                       <Badge
                         size="sm"
                         color={
-                          order.status === "Active"
+                          items.status === "active"
                             ? "success"
-                            : order.status === "Pending"
+                            : items.status === "unactive"
                               ? "warning"
                               : "error"
                         }
                       >
-                        {order.status}
+                        {items.status}
                       </Badge>
                     </div>
                   </TableCell>
-                  <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
-                    <div className="flex -space-x-2">ABCXYZ</div>
-                  </TableCell>
 
                   <TableCell className="px-4 py-3 text-start text-theme-sm text-gray-500 dark:text-gray-400">
-                    <div className="flex -space-x-2">ABCXYZ</div>
+                    <div className="flex -space-x-2">
+                      {format(items.createdAt, "dd/MM/yyyy HH:mm:ss", {
+                        locale: vi,
+                      })}
+                    </div>
                   </TableCell>
                   <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
-                    <div className="flex -space-x-2">ABCXYZ</div>
+                    <div className="flex -space-x-2">
+                      {format(items.updatedAt, "dd/MM/yyyy HH:mm:ss", {
+                        locale: vi,
+                      })}
+                    </div>
                   </TableCell>
                   <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
                     <div className="flex gap-5 -space-x-2">
-                      <DocsIcon className="cursor-pointer text-green-500" />
-                      <TrashBinIcon className="cursor-pointer" />
+                      <Link href={`/category?id=${items._id}`}>
+                        <DocsIcon className="cursor-pointer text-green-500" />
+                      </Link>
+                      <button onClick={() => handleDelete(items._id)}>
+                        <TrashBinIcon className="cursor-pointer" />
+                      </button>
                     </div>
                   </TableCell>
                 </TableRow>
               ))}
             </TableBody>
-
-            {/* Table Body
-            <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05]">
-              {tableData.map((order) => (
-                <TableRow key={order.id}>
-                  <TableCell className="px-5 py-4 sm:px-6 text-start">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 overflow-hidden rounded-full">
-                        <Image
-                          width={40}
-                          height={40}
-                          src={order.user.image}
-                          alt={order.user.name}
-                        />
-                      </div>
-                      <div>
-                        <span className="block font-medium text-gray-800 text-theme-sm dark:text-white/90">
-                          {order.user.name}
-                        </span>
-                        <span className="block text-gray-500 text-theme-xs dark:text-gray-400">
-                          {order.user.role}
-                        </span>
-                      </div>
-                    </div>
-                  </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.projectName}
-                  </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    <div className="flex -space-x-2">
-                      {order.team.images.map((teamImage, index) => (
-                        <div
-                          key={index}
-                          className="w-6 h-6 overflow-hidden border-2 border-white rounded-full dark:border-gray-900"
-                        >
-                          <Image
-                            width={24}
-                            height={24}
-                            src={teamImage}
-                            alt={`Team member ${index + 1}`}
-                            className="w-full"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    <Badge
-                      size="sm"
-                      color={
-                        order.status === "Active"
-                          ? "success"
-                          : order.status === "Pending"
-                          ? "warning"
-                          : "error"
-                      }
-                    >
-                      {order.status}
-                    </Badge>
-                  </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-theme-sm dark:text-gray-400">
-                    {order.budget}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody> */}
           </Table>
         </div>
       </div>

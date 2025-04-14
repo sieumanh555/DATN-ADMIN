@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: "This is Next.js Blank Page TailAdmin Dashboard Template",
 };
 
-export default function BlankPage() {
+export default function Setting() {
   return (
     <div>
       <PageBreadcrumb pageTitle="Blank Page" />

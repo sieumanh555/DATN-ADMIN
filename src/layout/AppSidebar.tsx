@@ -13,7 +13,11 @@ import {
   BookOpenIcon,
   BanknotesIcon,
   UserCircleIcon,
-  BuildingOffice2Icon
+  ClipboardDocumentCheckIcon,
+  DocumentTextIcon,
+  InformationCircleIcon,
+  WrenchScrewdriverIcon,
+  BuildingOffice2Icon,
 } from "@heroicons/react/24/solid";
 
 import {
@@ -24,7 +28,7 @@ import {
   GridIcon,
   // ListIcon,
   // PageIcon,
-  PieChartIcon,
+  // PieChartIcon,
   // PlugInIcon,
   // TableIcon,
   // UserCircleIcon,
@@ -69,8 +73,8 @@ const navItems: NavItem[] = [
     subItems: [
       { name: "Product List", path: "/sanpham", pro: false },
       { name: "Categories List", path: "/danhmuc", pro: false },
-      { name: "Product Settings", path: "/product", pro: false },
-      { name: "Categories Settings", path: "/category", pro: false },
+      // { name: "Product Settings", path: "/product", pro: false },
+      // { name: "Categories Settings", path: "/category", pro: false },
     ],
   },
   {
@@ -79,8 +83,8 @@ const navItems: NavItem[] = [
     subItems: [
       { name: "User Account", path: "/tkkh", pro: false },
       { name: "Employee Account", path: "/tknv", pro: false },
-      { name: "Employee Account Settings", path: "/staff", pro: false },
-      { name: "User Account Settings", path: "/user", pro: false },
+      // { name: "Employee Account Settings", path: "/staff", pro: false },
+      // { name: "User Account Settings", path: "/user", pro: false },
     ],
   },
   {
@@ -127,31 +131,24 @@ const navItems: NavItem[] = [
 
 const othersItems: NavItem[] = [
   {
-    icon: <PieChartIcon />,
+    icon: <ClipboardDocumentCheckIcon className="h-6 w-6" />,
     name: "Policies",
-    subItems: [
-      { name: "Nhà nước", path: "/blanke", pro: false },
-      { name: "Công ty", path: "/blanka", pro: false },
-      { name: "Công lương", path: "/blankb", pro: false },
-    ],
+    path: "/policies",
   },
   {
-    icon: <PieChartIcon />,
+    icon: <DocumentTextIcon className="h-6 w-6" />,
     name: "Regulations",
-    subItems: [
-      { name: "Công ty", path: "/blankc", pro: false },
-      { name: "Công tác", path: "/blankd", pro: false },
-    ],
+    path: "/regulations",
   },
   {
-    icon: <PieChartIcon />,
+    icon: <InformationCircleIcon className="h-6 w-6" />,
     name: "Support",
-    path: "/blank",
+    path: "/support",
   },
   {
-    icon: <PieChartIcon />,
+    icon: <WrenchScrewdriverIcon className="h-6 w-6" />,
     name: "Setting",
-    path: "/blanks",
+    path: "/setting",
   },
   // {
   //   icon: <PieChartIcon />,

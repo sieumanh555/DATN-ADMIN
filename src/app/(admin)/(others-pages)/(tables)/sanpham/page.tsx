@@ -1,7 +1,6 @@
 import ComponentCard from "@/components/common/ComponentCard";
 import PageBreadcrumb from "@/components/common/PageBreadCrumb";
 import Product from "@/components/tables/product";
-
 import React from "react";
 
 export default function SanPham() {

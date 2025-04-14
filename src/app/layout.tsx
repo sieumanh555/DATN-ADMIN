@@ -11,6 +11,9 @@ const outfit = Outfit({
   variable: "--font-outfit-sans",
   subsets: ["latin"],
 });
+// pages/_app.tsx
+import "../components/progress/loader.css"; // Import CSS của NProgress
+import Loader from "../components/progress/loader"; // Import Loader
 
 export default function RootLayout({
   children,
@@ -19,6 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Loader />
       <body className={`${outfit.variable} dark:bg-gray-900`}>
         <ThemeProvider>
           <SidebarProvider>{children}</SidebarProvider>

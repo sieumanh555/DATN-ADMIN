@@ -1,49 +1,185 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ComponentCard from "../../common/ComponentCard";
 import Label from "../../form/Label";
 import Input from "../../form/input/InputField";
 import Select from "../../form/Select";
-import TextArenHH from "@/components/form/form-elements/TextArenaHH";
-
+import TextArenaHH from "@/components/form/form-elements/TextArenaHH";
+import { useProduct_hook } from "./product_hook";
+import { useProduct } from "./product_context";
+import { categoryService } from "@/services/categories_controller";
+import { Categories } from "@/model/categories_model";
+import Image from "next/image";
 export default function Product() {
-  const options = [
-    { value: "marketing", label: "Marketing" },
-    { value: "template", label: "Template" },
-    { value: "development", label: "Development" },
-  ];
-  const handleSelectChange = (value: string) => {
-    console.log("Selected value:", value);
-  };
+  const [message, setMessage] = useState("");
+  const { product, loading } = useProduct_hook();
+  const { productData, setProductData } = useProduct();
+  const [categories, setCategories] = useState<Categories[]>([]);
+  useEffect(() => {
+    categoryService.getAllCategory().then(setCategories);
+  }, []);
+
+  useEffect(() => {
+    if (product?.mota) {
+      setMessage(product.mota);
+    }
+  }, [product?.mota]); // Chạy khi product?.mota thay đổi
+
+  const options =
+    product?.status === "Còn hàng"
+      ? [{ value: "Hết hàng", label: "Hết hàng" }]
+      : product?.status === "available"
+        ? [{ value: "Còn hàng", label: "Còn hàng" }]
+        : [];
+  const optionsHot =
+    product?.hot === 1
+      ? [{ value: "2", label: "Bán chạy" }]
+      : product?.hot === 2
+        ? [{ value: "1", label: "Bình thường" }]
+        : [];
+  const optionsCategory = categories.map((category) => ({
+    value: category._id,
+    label: category.name,
+  }));
+  useEffect(() => {
+    console.log("productData thay đổi:", product);
+  }, [product]);
+
   return (
-    <ComponentCard title="Default Inputs">
+    <ComponentCard title="Product">
       <div className="space-y-6">
         <div>
           <Label>ProductID</Label>
-          <Input type="text" placeholder="info@gmail.com" disabled />
+          <Input type="text" defaultValue={product?.sku_id} disabled />
         </div>
         <div>
           <Label>ProductName</Label>
-          <Input type="text" placeholder="info@gmail.com" />
+          <Input
+            type="text"
+            defaultValue={product?.name}
+            onChange={(e) =>
+              setProductData({ ...productData, name: e.target.value })
+            }
+          />
         </div>
         <div>
           <Label>Price</Label>
-          <Input type="text" placeholder="info@gmail.com" />
+          <Input
+            type="text"
+            defaultValue={product?.price}
+            onChange={(e) =>
+              setProductData({ ...productData, price: Number(e.target.value) })
+            }
+          />
         </div>
         <div>
           <Label>Promotion Price</Label>
-          <Input type="text" placeholder="info@gmail.com" />
+          <Input
+            type="text"
+            defaultValue={product?.pricePromo}
+            onChange={(e) =>
+              setProductData({
+                ...productData,
+                pricePromo: Number(e.target.value),
+              })
+            }
+          />
+        </div>
+        <div>
+          <Label>Quantity</Label>
+          <Input
+            type="text"
+            defaultValue={product?.pricePromo}
+            onChange={(e) =>
+              setProductData({
+                ...productData,
+                quantity: Number(e.target.value),
+              })
+            }
+          />
+        </div>
+        <div>
+          <Label>View</Label>
+          <Input
+            type="text"
+            defaultValue={product?.pricePromo}
+            onChange={(e) =>
+              setProductData({ ...productData, view: Number(e.target.value) })
+            }
+            disabled
+          />
         </div>
         <div>
           <Label>Describe</Label>
-          <TextArenHH />
+          <TextArenaHH
+            value={message}
+            onChange={(newValue: string) => {
+              setMessage(newValue); // Cập nhật state message
+              setProductData({ ...productData, mota: newValue }); // Cập nhật productData
+            }}
+          />
+        </div>
+        <div>
+          <Label>Image</Label>
+          <div className="my-5">
+            <Image
+              width={80}
+              height={40}
+              src={product?.hinhanh ?? "/default-image.jpg"} // Đường dẫn ảnh mặc định
+              alt={product?.name ?? "No Image"}
+            />
+          </div>
+          <Input
+            type="text"
+            defaultValue={product?.hinhanh}
+            onChange={(e) =>
+              setProductData({ ...productData, hinhanh: e.target.value })
+            }
+          />
+        </div>
+        <div>
+          <Label>Hot</Label>
+          <Select
+            options={optionsHot}
+            placeholder={
+              product?.hot === 0
+                ? "Hàng mới"
+                : product?.hot === 2
+                  ? "Bán chạy"
+                  : "Bình thường"
+            }
+            onChange={(handleSelectChange) =>
+              setProductData({
+                ...productData,
+                hot: Number(handleSelectChange),
+              })
+            }
+            className="dark:bg-dark-900"
+          />
         </div>
         <div>
           <Label>Status</Label>
           <Select
             options={options}
-            placeholder="Select an option"
-            onChange={handleSelectChange}
+            placeholder={product?.status}
+            onChange={(handleSelectChange) =>
+              setProductData({ ...productData, status: handleSelectChange })
+            }
+            className="dark:bg-dark-900"
+          />
+        </div>
+        <div>
+          <Label>Category</Label>
+          <Select
+            options={optionsCategory}
+            placeholder={
+              product?.category
+                ? product.category.categoryName
+                : "Chọn danh mục"
+            }
+            onChange={(handleSelectChange) =>
+              setProductData({ ...productData, category: handleSelectChange })
+            }
             className="dark:bg-dark-900"
           />
         </div>

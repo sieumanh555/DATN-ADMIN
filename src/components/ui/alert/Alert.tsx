@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import "@/components/ui/alert/alert.css";
 
 interface AlertProps {
   variant: "success" | "error" | "warning" | "info"; // Alert type
@@ -114,7 +115,9 @@ const Alert: React.FC<AlertProps> = ({
 
   return (
     <div
-      className={`rounded-xl border p-4 ${variantClasses[variant].container}`}
+      // max-w-xs
+      className={`z-50 w-full rounded-md p-4 shadow-md ${variantClasses[variant].container} animate__animated animate__fadeIn`}
+      style={{ animationDuration: "0.5s" }}
     >
       <div className="flex items-start gap-3">
         <div className={`-mt-0.5 ${variantClasses[variant].icon}`}>

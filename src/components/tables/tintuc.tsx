@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Table,
   TableBody,
@@ -8,120 +8,20 @@ import {
   TableRow,
 } from "../ui/table";
 
-import Badge from "../ui/badge/Badge";
 import Image from "next/image";
 import TextArea from "../form/input/TextArea";
 import { DocsIcon, TrashBinIcon } from "@/icons";
-
-interface Order {
-  id: number;
-  user: {
-    image: string;
-    name: string;
-    role: string;
-  };
-  projectName: string;
-  team: {
-    images: string[];
-  };
-  status: string;
-  budget: string;
-}
-
-// Define the table data using the interface
-const tableData: Order[] = [
-  {
-    id: 1,
-    user: {
-      image: "/images/user/user-17.jpg",
-      name: "Lindsey Curtis",
-      role: "Web Designer",
-    },
-    projectName: "Agency Website",
-    team: {
-      images: [
-        "/images/user/user-22.jpg",
-        "/images/user/user-23.jpg",
-        "/images/user/user-24.jpg",
-      ],
-    },
-    budget: "3.9K",
-    status: "Active",
-  },
-  {
-    id: 2,
-    user: {
-      image: "/images/user/user-18.jpg",
-      name: "Kaiya George",
-      role: "Project Manager",
-    },
-    projectName: "Technology",
-    team: {
-      images: ["/images/user/user-25.jpg", "/images/user/user-26.jpg"],
-    },
-    budget: "24.9K",
-    status: "Pending",
-  },
-  {
-    id: 3,
-    user: {
-      image: "/images/user/user-17.jpg",
-      name: "Zain Geidt",
-      role: "Content Writing",
-    },
-    projectName: "Blog Writing",
-    team: {
-      images: ["/images/user/user-27.jpg"],
-    },
-    budget: "12.7K",
-    status: "Active",
-  },
-  {
-    id: 4,
-    user: {
-      image: "/images/user/user-20.jpg",
-      name: "Abram Schleifer",
-      role: "Digital Marketer",
-    },
-    projectName: "Social Media",
-    team: {
-      images: [
-        "/images/user/user-28.jpg",
-        "/images/user/user-29.jpg",
-        "/images/user/user-30.jpg",
-      ],
-    },
-    budget: "2.8K",
-    status: "Cancel",
-  },
-  {
-    id: 5,
-    user: {
-      image: "/images/user/user-21.jpg",
-      name: "Carla George",
-      role: "Front-end Developer",
-    },
-    projectName: "Website",
-    team: {
-      images: [
-        "/images/user/user-31.jpg",
-        "/images/user/user-32.jpg",
-        "/images/user/user-33.jpg",
-      ],
-    },
-    budget: "4.5K",
-    status: "Active",
-  },
-];
-
+import type { News } from "@/model/news_model";
+import { newsService } from "@/services/news_controller";
+import { format } from "date-fns";
+import { vi } from "date-fns/locale"; // Import locale nếu cần
 export default function News() {
-  const [message, setMessage] = useState<{ [key: string]: string }>({});
-  const handleTextChange = (id: number, value: string) => {
-    setMessage((prev) => ({
-      ...prev,
-      [String(id)]: value, // Lưu message theo id của sản phẩm
-    }));
-  };
+  const [news, setNews] = useState<News[]>([]);
+
+  useEffect(() => {
+    newsService.getAllNews().then(setNews);
+  }, []);
+  const [message] = useState<{ [key: string]: string }>({});
   return (
     <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
       <div className="max-w-full overflow-x-auto">
@@ -182,33 +82,26 @@ export default function News() {
                   isHeader
                   className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
-                  Status
-                </TableCell>
-                <TableCell
-                  isHeader
-                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
-                >
                   Controller
                 </TableCell>
               </TableRow>
             </TableHeader>
 
             <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05]">
-              {tableData.map((order) => (
-                <TableRow key={order.id}>
+              {news.map((items, index) => (
+                <TableRow key={items._id}>
                   <TableCell className="px-5 py-4 text-start sm:px-6">
-                    <div className="flex items-center gap-3">1</div>
+                    <div className="flex items-center gap-3">{index + 1}</div>
                   </TableCell>
                   <TableCell className="px-4 py-3 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
-                    {order.projectName}
+                    {items.sku_id}
                   </TableCell>
                   <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
                     <div className="flex -space-x-2">ABCXYZ</div>
                   </TableCell>
                   <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
                     <TextArea
-                      value={message[String(order.id)] || ""}
-                      onChange={(value) => handleTextChange(order.id, value)} // ✅ Đúng kiểu dữ liệu
+                      value={message[items.sku_id] || items.content || ""} // Hiển thị nội dung từ items.content nếu chưa có trong state
                       rows={5}
                     />
                   </TableCell>
@@ -217,51 +110,46 @@ export default function News() {
                       <Image
                         width={40}
                         height={40}
-                        src={order.user.image}
-                        alt={order.user.name}
+                        src={
+                          items.image ||
+                          "https://i.pinimg.com/736x/80/72/cd/8072cda28d2883367424be826a757708.jpg"
+                        }
+                        alt={items.title}
                       />
                     </div>
                   </TableCell>
                   <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
                     <div className="flex -space-x-2">
-                      {order.team.images.map((teamImage, index) => (
+                      {items.imageChild?.map((teamImage) => (
                         <div
-                          key={index}
+                          key={teamImage}
                           className="h-6 w-6 overflow-hidden rounded-full border-2 border-white dark:border-gray-900"
                         >
                           <Image
                             width={24}
                             height={24}
                             src={teamImage}
-                            alt={`Team member ${index + 1}`}
+                            alt="Team member"
                             className="w-full"
                           />
                         </div>
                       ))}
                     </div>
                   </TableCell>
-                  <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
-                    <div className="flex -space-x-2">fsdfgsadg</div>
-                  </TableCell>
-                  <TableCell className="px-4 py-3 text-start text-theme-sm text-gray-500 dark:text-gray-400">
-                    <div className="flex -space-x-2">ABCXYZ</div>
-                  </TableCell>
+
                   <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
                     <div className="flex -space-x-2">
-                      <Badge
-                        size="sm"
-                        color={
-                          order.status === "Active"
-                            ? "success"
-                            : order.status === "Pending"
-                              ? "warning"
-                              : "error"
-                        }
-                      >
-                        {order.status}
-                      </Badge>
+                      {format(items.createdAt, "dd/MM/yyyy HH:mm:ss", {
+                        locale: vi,
+                      })}
                     </div>
                   </TableCell>
+                  <TableCell className="px-4 py-3 text-start text-theme-sm text-gray-500 dark:text-gray-400">
+                    <div className="flex -space-x-2">
+                      {items.category.categoryName}
+                    </div>
+                  </TableCell>
+
                   <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
                     <div className="flex gap-5 -space-x-2">
                       <DocsIcon className="cursor-pointer text-green-500" />
