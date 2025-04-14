@@ -18,7 +18,7 @@ const validationSchema = Yup.object().shape({
 
 export default function Category() {
   const router = useRouter();
-  const { category, loading } = useCategory_hook();
+  const { category } = useCategory_hook();
   const handleSubmit = async (values: { name: string; status: string }) => {
     try {
       const requestBody = {

@@ -136,7 +136,7 @@ export default function Product() {
       }, 3000); // 4 giây
       return () => clearTimeout(timer); // Dọn dẹp timer khi component unmount
     }
-  }, [successMessages]);
+  }, [successMessages, router]);
   return (
     <>
       {errorMessages.length > 0 && (
