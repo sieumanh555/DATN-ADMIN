@@ -140,7 +140,11 @@ const Calendar: React.FC = () => {
           customButtons={{
             addEventButton: {
               text: "Add Event +",
-              click: openModal,
+              click: (ev: MouseEvent, element: HTMLElement) => {
+                // Tùy vào cách bạn lấy `id`, có thể là từ element hoặc dataset...
+                const id = element?.getAttribute('data-id') || undefined;
+                openModal(id);
+              }
             },
           }}
         />
