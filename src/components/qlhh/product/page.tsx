@@ -12,7 +12,7 @@ import { Categories } from "@/model/categories_model";
 import Image from "next/image";
 export default function Product() {
   const [message, setMessage] = useState("");
-  const { product, loading } = useProduct_hook();
+  const { product } = useProduct_hook();
   const { productData, setProductData } = useProduct();
   const [categories, setCategories] = useState<Categories[]>([]);
   useEffect(() => {
