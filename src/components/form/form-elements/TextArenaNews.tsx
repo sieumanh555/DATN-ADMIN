@@ -3,8 +3,21 @@ import React, { useState } from "react";
 import ComponentCard from "../../common/ComponentCard";
 import TextAreaNews from "../input/TextArenaNews";
 
-export default function TextArenaHH() {
-  const [messageTwo, setMessageTwo] = useState("");
+interface TextArenaHHProps {
+  value?: string;
+  onChange?: (value: string) => void;
+}
+
+export default function TextArenaHH({ value = "", onChange }: TextArenaHHProps) {
+  const [messageTwo, setMessageTwo] = useState(value);
+
+  const handleChange = (val: string) => {
+    setMessageTwo(val);
+    if (onChange) {
+      onChange(val);
+    }
+  };
+
   return (
     <ComponentCard title="Data">
       <div className="space-y-6">
@@ -13,7 +26,7 @@ export default function TextArenaHH() {
             rows={6}
             value={messageTwo}
             error
-            onChange={(value) => setMessageTwo(value)}
+            onChange={handleChange}
             hint="Please enter a valid message."
           />
         </div>
