@@ -1,5 +1,11 @@
 import React from "react";
 
+type TextareaProps = {
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  placeholder?: string;
+};
+
 const TextAreaNews: React.FC<TextareaProps> = () => {
   return (
     <form>
@@ -193,12 +199,12 @@ const TextAreaNews: React.FC<TextareaProps> = () => {
           </div>
         </div>
         <div className="rounded-b-lg bg-white px-4 py-2 dark:bg-gray-800">
-          <label forhtml="editor" className="sr-only">
+          <label className="sr-only">
             Publish post
           </label>
           <textarea
             id="editor"
-            rows="8"
+            rows={8}
             className="block w-full border-0 bg-white px-0 text-sm text-gray-800 focus:ring-0 dark:bg-gray-800 dark:text-white dark:placeholder-gray-400"
             placeholder="Write an article..."
             required
