@@ -41,6 +41,7 @@ export default function Product() {
     value: category._id,
     label: category.name,
   }));
+  
   useEffect(() => {
     console.log("productData thay đổi:", product);
   }, [product]);
@@ -173,7 +174,7 @@ export default function Product() {
           <Select
             options={optionsCategory}
             placeholder={
-              product?.category
+              typeof product?.category === 'object' && product?.category !== null
                 ? product.category.categoryName
                 : "Chọn danh mục"
             }
