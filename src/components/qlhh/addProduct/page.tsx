@@ -65,7 +65,7 @@ export default function Product() {
     category: string;
   }) => {
     // Kiểm tra tất cả các trường cần thiết trước khi gửi
-    const requiredFields = [
+    const requiredFields: (keyof typeof values)[] = [  // Sử dụng keyof để chắc chắn
       "name",
       "price",
       "pricePromo",
