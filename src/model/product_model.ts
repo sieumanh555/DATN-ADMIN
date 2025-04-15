@@ -26,7 +26,7 @@ export interface Product {
   view: number;
   rating: number;
   status: string;
-  category: Category;
+  category: string | Category;
   variants: Variant[];
   createdAt: Date;
   updatedAt: Date;

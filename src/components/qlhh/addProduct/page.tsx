@@ -106,7 +106,7 @@ export default function Product() {
         status: values.status,
         location: values.location,
         mota: values.mota,
-        category: values.category,  // Chỉ gửi categoryId
+        category: values.category, 
       };
       console.log(requestBody);
 
