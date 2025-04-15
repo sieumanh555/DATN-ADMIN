@@ -8,7 +8,7 @@ import TextArenaHH from "@/components/form/form-elements/TextArenaHH";
 import { useProduct_hook } from "./product_hook";
 import { useProduct } from "./product_context";
 import { categoryService } from "@/services/categories_controller";
-import { Categories } from "@/model/categories_model";
+import { Categories, CategoryName } from "@/model/categories_model";
 import Image from "next/image";
 export default function Product() {
   const [message, setMessage] = useState("");
@@ -175,7 +175,7 @@ export default function Product() {
             options={optionsCategory}
             placeholder={
               typeof product?.category === 'object' && product?.category !== null
-                ? product.category.categoryName
+                ? (product.category as CategoryName).categoryName
                 : "Chọn danh mục"
             }
             onChange={(handleSelectChange) =>

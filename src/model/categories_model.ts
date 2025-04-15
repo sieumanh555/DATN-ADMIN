@@ -6,3 +6,7 @@ export interface Categories {
   createdAt: Date;
   updatedAt: Date;
 }
+export interface CategoryName {
+  _id: string;
+  categoryName: string;
+}
