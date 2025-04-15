@@ -310,7 +310,10 @@ export default function Product() {
                     </TableCell>
                     <TableCell className="whitespace-nowrap px-4 py-3 text-start text-theme-sm text-gray-500 dark:text-gray-400">
                       <div className="flex -space-x-2">
-                        {products.category.categoryName}
+                      {typeof products.category === 'object' && products.category !== null && 'categoryName' in products.category
+                        ? products.category.categoryName
+                        : 'Không có danh mục' // Or some other default value if category is not populated
+                      }
                       </div>
                     </TableCell>
                     <TableCell className="whitespace-nowrap px-4 py-3 text-start text-theme-sm text-gray-500 dark:text-gray-400">

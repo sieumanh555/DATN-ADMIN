@@ -4,7 +4,7 @@ import Voucher from "@/components/tables/voucher";
 
 import React from "react";
 
-export default function Product() {
+export default function PhieuGiam() {
   return (
     <div>
       <PageBreadcrumb pageTitle="Voucher" />

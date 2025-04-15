@@ -1,24 +1,40 @@
 "use client";
-import React from "react";
+import React, {useState, useEffect} from "react";
 import ComponentCard from "../../common/ComponentCard";
 import Label from "../../form/Label";
 import Input from "../../form/input/InputField";
 import Select from "../../form/Select";
 import Button from "@/components/ui/button/Button";
-import { useCategory_hook } from "./category_hook";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { categoryService } from "@/services/categories_controller";
 import { useRouter } from "next/navigation";
+import { Categories } from "@/model/categories_model";
+import { useSearchParams } from "next/navigation";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Category name is required"),
   status: Yup.string().required("Status is required"),
 });
-
 export default function Category() {
   const router = useRouter();
-  const { category } = useCategory_hook();
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id");
+  const [category, setCategory] = useState<Categories | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!id) {
+      setLoading(false);
+      return;
+    }
+    setLoading(true);
+    categoryService
+      .getCategoryById(id)
+      .then((response) => setCategory(response))
+      .catch((error) => console.error("Lỗi khi lấy sản phẩm:", error))
+      .finally(() => setLoading(false));
+  }, [id]);
   const handleSubmit = async (values: { name: string; status: string }) => {
     try {
       const requestBody = {
@@ -42,6 +58,7 @@ export default function Category() {
 
   return (
     <ComponentCard title="Default Inputs">
+      {loading}
       <Formik
         initialValues={{
           name: category?.name || "",

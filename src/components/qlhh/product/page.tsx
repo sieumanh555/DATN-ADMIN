@@ -5,16 +5,34 @@ import Label from "../../form/Label";
 import Input from "../../form/input/InputField";
 import Select from "../../form/Select";
 import TextArenaHH from "@/components/form/form-elements/TextArenaHH";
-import { useProduct_hook } from "./product_hook";
 import { useProduct } from "./product_context";
 import { categoryService } from "@/services/categories_controller";
 import { Categories, CategoryName } from "@/model/categories_model";
+import { productService } from "@/services/product_controller";
+import type { Product } from "@/model/product_model";
+import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 export default function Product() {
   const [message, setMessage] = useState("");
-  const { product } = useProduct_hook();
   const { productData, setProductData } = useProduct();
   const [categories, setCategories] = useState<Categories[]>([]);
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id");
+  const [product, setProduct] = useState<Product | null>(null);
+  const [loading, setLoading] = useState(true);
+  
+  useEffect(() => {
+    if (!id) {
+      setLoading(false);
+      return;
+    }
+    setLoading(true);
+    productService
+      .getProductById(id)
+      .then((response) => setProduct(response))
+      .catch((error) => console.error("Lỗi khi lấy sản phẩm:", error))
+      .finally(() => setLoading(false));
+  }, [id]);
   useEffect(() => {
     categoryService.getAllCategory().then(setCategories);
   }, []);
@@ -48,6 +66,7 @@ export default function Product() {
 
   return (
     <ComponentCard title="Product">
+      {loading}
       <div className="space-y-6">
         <div>
           <Label>ProductID</Label>

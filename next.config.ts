@@ -29,5 +29,9 @@ const nextConfig: NextConfig = {
     return config;
   },
 };
-
+module.exports = {
+  experimental: {
+    missingSuspenseWithCSRBailout: false,
+  },
+}
 export default nextConfig;

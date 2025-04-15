@@ -4,7 +4,7 @@ import News from "@/components/tables/tintuc";
 
 import React from "react";
 
-export default function SanPham() {
+export default function Tintuc() {
   return (
     <div>
       <PageBreadcrumb pageTitle="Task Kanban" />
