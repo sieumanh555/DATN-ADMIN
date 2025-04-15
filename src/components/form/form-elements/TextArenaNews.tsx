@@ -1,36 +1,20 @@
-"use client";
-import React, { useState } from "react";
-import ComponentCard from "../../common/ComponentCard";
-import TextAreaNews from "../input/TextArenaNews";
+import React from "react";
 
-interface TextArenaHHProps {
-  value?: string;
-  onChange?: (value: string) => void;
+interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  error?: boolean;
+  hint?: string;
 }
 
-export default function TextArenaHH({ value = "", onChange }: TextArenaHHProps) {
-  const [messageTwo, setMessageTwo] = useState(value);
-
-  const handleChange = (val: string) => {
-    setMessageTwo(val);
-    if (onChange) {
-      onChange(val);
-    }
-  };
-
+const TextAreaNews: React.FC<TextareaProps> = ({ error, hint, ...props }) => {
   return (
-    <ComponentCard title="Data">
-      <div className="space-y-6">
-        <div>
-          <TextAreaNews
-            rows={6}
-            value={messageTwo}
-            error
-            onChange={handleChange}
-            hint="Please enter a valid message."
-          />
-        </div>
-      </div>
-    </ComponentCard>
+    <div>
+      <textarea
+        {...props}
+        className={`w-full p-2 border ${error ? "border-red-500" : "border-gray-300"} rounded`}
+      />
+      {error && hint && <p className="text-red-500 text-sm mt-1">{hint}</p>}
+    </div>
   );
-}
+};
+
+export default TextAreaNews;
