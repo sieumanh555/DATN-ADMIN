@@ -1,10 +1,10 @@
 import PageBreadcrumb from "@/components/common/PageBreadCrumb";
-import Product from "@/components/qlhh/product/page";
 import { Metadata } from "next";
-import React from "react";
+import React, {Suspense} from "react";
 import Button from "@/components/ui/button/Button";
 import { ProductProvider } from "@/components/qlhh/product/product_context";
-import SaveButton from "./saveproduct";
+import SaveButton from "@/components/qlhh/saveproduct";
+import ProductClientWrapper from "@/components/qlhh/product/ProductClientWrapper"; // 👈 Wrapper mới
 
 export const metadata: Metadata = {
   title: "Next.js Form Elements | TailAdmin - Next.js Dashboard Template",
@@ -18,13 +18,15 @@ export default function FormElements() {
       <div>
         <PageBreadcrumb pageTitle="Chỉnh sửa" />
         <div className="space-y-6">
-          <Product />
+          <ProductClientWrapper />
         </div>
         <div className="col-span-full flex flex-col gap-5">
           <Button className="w-full" size="sm" color="gray">
             Decline
           </Button>
-          <SaveButton />
+          <Suspense fallback={<p>Loading...</p>}>
+            <SaveButton />
+          </Suspense>
         </div>
       </div>
     </ProductProvider>

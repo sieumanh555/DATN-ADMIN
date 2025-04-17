@@ -9,22 +9,33 @@ import React, { useState, useEffect, useRef } from "react";
 
 const AppHeader: React.FC = () => {
   const [isApplicationMenuOpen, setApplicationMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false); // Đảm bảo chỉ render trên client
 
   const { isMobileOpen, toggleSidebar, toggleMobileSidebar } = useSidebar();
+  const inputRef = useRef<HTMLInputElement>(null);
 
+  // Kiểm tra khi component đã mount trên client
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Chỉ chạy logic sử dụng `window` khi đã mount
   const handleToggle = () => {
-    if (window.innerWidth >= 991) {
-      toggleSidebar();
-    } else {
-      toggleMobileSidebar();
+    if (typeof window !== "undefined") {
+      if (window.innerWidth >= 991) {
+        toggleSidebar();
+      } else {
+        toggleMobileSidebar();
+      }
     }
   };
 
+  // Toggle menu ứng dụng
   const toggleApplicationMenu = () => {
     setApplicationMenuOpen(!isApplicationMenuOpen);
   };
-  const inputRef = useRef<HTMLInputElement>(null);
 
+  // Dùng useEffect để focus khi nhấn Ctrl + K hoặc Cmd + K
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if ((event.metaKey || event.ctrlKey) && event.key === "k") {
@@ -39,6 +50,8 @@ const AppHeader: React.FC = () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
+
+  if (!mounted) return null; // Đảm bảo component chỉ render trên client
 
   return (
     <header className="sticky top-0 z-99999 flex w-full border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900 lg:border-b">

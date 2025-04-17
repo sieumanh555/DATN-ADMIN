@@ -115,7 +115,7 @@ export default function Product() {
       <div className="flex justify-between">
         <div className="relative w-full max-w-[400px]">
           <input
-            className="focus:shadow-outline w-full appearance-none rounded-md border-2 border-gray-200/90 px-4 py-3 pl-10 leading-tight text-gray-800 transition-colors hover:border-gray-200/20 focus:border-blue-600 focus:outline-none focus:ring-blue-600"
+            className="focus:shadow-outline w-full dark:bg-dark-900 appearance-none rounded-md border-2 border-gray-200/90 px-4 py-3 pl-10 leading-tight text-gray-800 transition-colors hover:border-gray-200/20 focus:border-blue-600 focus:outline-none focus:ring-blue-600 dark:border-gray-800 dark:bg-gray-900 dark:bg-white/[0.03] dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800 xl:w-[430px]"
             id="username"
             type="text"
             value={keyword}

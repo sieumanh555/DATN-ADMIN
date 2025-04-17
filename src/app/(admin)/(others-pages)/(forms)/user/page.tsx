@@ -2,7 +2,7 @@ import UserAddressCard from "@/components/qlhh/user/user-profile/UserAddressCard
 import UserInfoCard from "@/components/qlhh/user/user-profile/UserInfoCard";
 import UserMetaCard from "@/components/qlhh/user/user-profile/UserMetaCard";
 import { Metadata } from "next";
-import React from "react";
+import React, { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Next.js Profile | TailAdmin - Next.js Dashboard Template",
@@ -18,9 +18,11 @@ export default function Profile() {
           Profile
         </h3>
         <div className="space-y-6">
+        <Suspense fallback={<p>Loading...</p>}>
           <UserMetaCard />
           <UserInfoCard />
           <UserAddressCard />
+          </Suspense>
         </div>
       </div>
     </div>
