@@ -1,5 +1,5 @@
 "use client";
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import ComponentCard from "../../common/ComponentCard";
 import Label from "../../form/Label";
 import Input from "../../form/input/InputField";

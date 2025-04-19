@@ -11,12 +11,11 @@ export default function SanPhamVariant() {
       <PageBreadcrumb pageTitle="Product" />
       <div className="space-y-6">
         <ComponentCard title="Sản phẩm">
-        <Suspense fallback={<p>Loading...</p>}>
-          <ProductVariantsButton />
-          <ProductVariant />
+          <Suspense fallback={<p>Loading...</p>}>
+            <ProductVariantsButton />
+            <ProductVariant />
           </Suspense>
         </ComponentCard>
-        
       </div>
     </div>
   );

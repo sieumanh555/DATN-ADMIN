@@ -20,7 +20,7 @@ export default function Product() {
   const id = searchParams.get("id");
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
-  
+
   useEffect(() => {
     if (!id) {
       setLoading(false);
@@ -59,7 +59,7 @@ export default function Product() {
     value: category._id,
     label: category.name,
   }));
-  
+
   useEffect(() => {
     console.log("productData thay đổi:", product);
   }, [product]);
@@ -193,7 +193,8 @@ export default function Product() {
           <Select
             options={optionsCategory}
             placeholder={
-              typeof product?.category === 'object' && product?.category !== null
+              typeof product?.category === "object" &&
+              product?.category !== null
                 ? (product.category as CategoryName).categoryName
                 : "Chọn danh mục"
             }

@@ -4,21 +4,69 @@ import Input from "@/components/form/input/InputField";
 import Label from "@/components/form/Label";
 import Button from "@/components/ui/button/Button";
 import Cookies from "js-cookie";
-import { ChevronLeftIcon, EyeCloseIcon, EyeIcon } from "@/icons";
+import {EyeCloseIcon, EyeIcon } from "@/icons";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
+import { employeeService } from "@/services/user_controller";
+import Alert from "../ui/alert/Alert";
+const validationSchema = Yup.object().shape({
+  email: Yup.string()
+    .email("Email không hợp lệ")
+    .required("Vui lòng nhập email"),
+  password: Yup.string()
+    .min(1, "Mật khẩu phải có ít nhất 6 ký tự")
+    .required("Vui lòng nhập mật khẩu"),
+});
 
 export default function SignInForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
+  const [successMessages, setSuccessMessages] = useState(false); // State chứa mảng lỗi
 
-  const handleLogin = () => {
-    const fakeToken = "test-access-token-123";
-    Cookies.set("accessToken", fakeToken, { expires: 1, sameSite: "lax" });
+const handleLogin = async (values: { email: string; password: string }) => {
+    try {
+      const requestBody = {
+        email: values.email,
+        password: values.password,
+      };
+      console.log(requestBody);
+      const response = await employeeService.loginAdmin(requestBody);
+      const accessToken = response.data.access_token;
+      const idUser = response.data.user._id;
+      Cookies.set("accessToken", accessToken, { expires: 1, path: "/" });
+      Cookies.set("idUser", idUser, { expires: 1, path: "/" });
+      setSuccessMessages(true); // Ẩn thông báo thành công sau 3 giây
+    } catch (error) {
+      console.error("Lỗi khi thêm:", error);
+      alert("Thêm sản phẩm thất bại. Vui lòng thử lại.");
+    }
   };
+    useEffect(() => {
+      if (successMessages) {
+        const timer = setTimeout(() => {
+          setSuccessMessages(false); // Reset error messages on successful submission
+          window.location.reload();
+        }, 4000); // 4 giây
+        return () => clearTimeout(timer); // Dọn dẹp timer khi component unmount
+      }
+    }, [successMessages]);
   return (
+    <>
+    {successMessages && (
+      <div className="fixed right-0 top-0 z-9999 mt-[77px] flex flex-col gap-5">
+      <Alert
+
+        variant="success"
+        title="Đăng nhập thành công"
+        message="Chuẩn bị chuyển trang.........."
+        showLink={false}
+      />
+    </div>
+    )}
     <div className="flex flex-1 flex-col rounded-2xl p-6 sm:rounded-none sm:border-0 sm:p-8">
-      <div className="mx-auto w-full max-w-md pt-10">
+      {/* <div className="mx-auto w-full max-w-md pt-10">
         <Link
           href="/"
           className="inline-flex items-center text-sm text-gray-500 transition-colors hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
@@ -26,7 +74,7 @@ export default function SignInForm() {
           <ChevronLeftIcon />
           Back to dashboard
         </Link>
-      </div>
+      </div> */}
       <div className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center">
         <div>
           <div className="mb-5 sm:mb-8">
@@ -38,7 +86,7 @@ export default function SignInForm() {
             </p>
           </div>
           <div>
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-5">
+            {/* <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-5">
               <button className="inline-flex items-center justify-center gap-3 rounded-lg bg-gray-100 px-7 py-3 text-sm font-normal text-gray-700 transition-colors hover:bg-gray-200 hover:text-gray-800 dark:bg-white/5 dark:text-white/90 dark:hover:bg-white/10">
                 <svg
                   width="20"
@@ -89,21 +137,37 @@ export default function SignInForm() {
                   Or
                 </span>
               </div>
-            </div>
-            <form>
+            </div> */}
+            <Formik
+          initialValues={{
+            email: "",
+            password: "",
+          }}
+          enableReinitialize
+          validationSchema={validationSchema}
+          onSubmit={handleLogin}
+        >
+          {({errors, touched }) => (
+            <Form>
               <div className="space-y-6">
                 <div>
                   <Label>
-                    Email <span className="text-error-500">*</span>{" "}
+                    Email <span className="text-error-500">*</span>
                   </Label>
-                  <Input placeholder="info@gmail.com" />
+                  <Field name="email" placeholder="info@gmail.com" as = {Input} />
+                  {errors.email && touched.email && (
+                    <div className="text-red-500 text-sm">{errors.email}</div>
+                  )}
                 </div>
+
                 <div>
                   <Label>
-                    Password <span className="text-error-500">*</span>{" "}
+                    Password <span className="text-error-500">*</span>
                   </Label>
                   <div className="relative">
-                    <Input
+                    <Field
+                      name="password"
+                      as = {Input}
                       type={showPassword ? "text" : "password"}
                       placeholder="Enter your password"
                     />
@@ -118,7 +182,11 @@ export default function SignInForm() {
                       )}
                     </span>
                   </div>
+                  {errors.password && touched.password && (
+                    <div className="text-red-500 text-sm">{errors.password}</div>
+                  )}
                 </div>
+
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <Checkbox checked={isChecked} onChange={setIsChecked} />
@@ -133,15 +201,19 @@ export default function SignInForm() {
                     Forgot password?
                   </Link>
                 </div>
+
                 <div>
-                  <Button onClick={handleLogin} className="w-full" size="sm">
+                  <Button type="submit" className="w-full" size="sm">
                     Sign in
                   </Button>
                 </div>
               </div>
-            </form>
+            </Form>
+          )}
+        </Formik>
 
-            <div className="mt-5">
+
+            {/* <div className="mt-5">
               <p className="text-center text-sm font-normal text-gray-700 dark:text-gray-400 sm:text-start">
                 Don&apos;t have an account? {""}
                 <Link
@@ -151,10 +223,11 @@ export default function SignInForm() {
                   Sign Up
                 </Link>
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
     </div>
+    </>
   );
 }

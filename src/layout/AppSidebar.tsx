@@ -134,7 +134,9 @@ const AppSidebar: React.FC = () => {
                   ? "menu-item-active"
                   : "menu-item-inactive"
               } cursor-pointer ${
-                !isExpanded && !isHovered ? "lg:justify-center" : "lg:justify-start"
+                !isExpanded && !isHovered
+                  ? "lg:justify-center"
+                  : "lg:justify-start"
               }`}
             >
               <span
@@ -152,7 +154,8 @@ const AppSidebar: React.FC = () => {
               {(isExpanded || isHovered || isMobileOpen) && (
                 <ChevronDownIcon
                   className={`ml-auto h-5 w-5 transition-transform duration-200 ${
-                    openSubmenu?.type === menuType && openSubmenu?.index === index
+                    openSubmenu?.type === menuType &&
+                    openSubmenu?.index === index
                       ? "rotate-180 text-brand-500"
                       : ""
                   }`}
@@ -250,7 +253,9 @@ const AppSidebar: React.FC = () => {
     type: "main" | "others";
     index: number;
   } | null>(null);
-  const [subMenuHeight, setSubMenuHeight] = useState<Record<string, number>>({});
+  const [subMenuHeight, setSubMenuHeight] = useState<Record<string, number>>(
+    {},
+  );
   const subMenuRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   const isActive = useCallback((path: string) => path === pathname, [pathname]);
@@ -308,7 +313,11 @@ const AppSidebar: React.FC = () => {
     clientReady && (
       <aside
         className={`fixed left-0 top-0 z-50 mt-16 flex h-screen flex-col border-r border-gray-200 bg-white px-5 text-gray-900 transition-all duration-300 ease-in-out dark:border-gray-800 dark:bg-gray-900 lg:mt-0 ${
-          isExpanded || isMobileOpen ? "w-[290px]" : isHovered ? "w-[290px]" : "w-[90px]"
+          isExpanded || isMobileOpen
+            ? "w-[290px]"
+            : isHovered
+              ? "w-[290px]"
+              : "w-[90px]"
         } ${isMobileOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0`}
         onMouseEnter={() => !isExpanded && setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -349,7 +358,9 @@ const AppSidebar: React.FC = () => {
             <div className="space-y-6">{renderMenuItems(navItems, "main")}</div>
           </nav>
           <nav>
-            <div className="space-y-6">{renderMenuItems(othersItems, "others")}</div>
+            <div className="space-y-6">
+              {renderMenuItems(othersItems, "others")}
+            </div>
           </nav>
         </div>
       </aside>

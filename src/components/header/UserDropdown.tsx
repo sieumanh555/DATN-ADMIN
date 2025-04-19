@@ -1,12 +1,31 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
-import React, { useState } from "react";
+import Button from "../ui/button/Button";
+import React, { useState, useEffect } from "react";
 import { Dropdown } from "../ui/dropdown/Dropdown";
 import { DropdownItem } from "../ui/dropdown/DropdownItem";
+import Cookies from "js-cookie";
+import { userService } from "@/services/user_controller";
+import { User } from "@/model/user_model";
+import { useRouter } from "next/navigation";
 
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState(false);
+  const [employee, setEmployee] = useState<User | null>(null);
+  const userId = Cookies.get("idUser"); // đúng cú pháp với js-cookie
+  const router = useRouter();
+  const handleRemove = () => {
+    Cookies.remove("accessToken");
+    router.push("/signin"); // Sử dụng router.push() để chuyển trang
+  };
+  useEffect(() => {
+      if (!userId) return;
+      userService
+        .getUser(userId)
+        .then((response) => setEmployee(response))
+        .catch((error) => console.error("Lỗi khi lấy user:", error))
+    }, [userId]);
+    console.log(employee);
 
   function toggleDropdown() {
     setIsOpen(!isOpen);
@@ -25,12 +44,16 @@ export default function UserDropdown() {
           <Image
             width={44}
             height={44}
-            src="/images/user/owner.jpg"
+            src={
+              employee?.image.startsWith("http")
+                ? employee?.image
+                : `/${employee?.image}`
+            }
             alt="User"
           />
         </span>
 
-        <span className="mr-1 block text-theme-sm font-medium">Musharof</span>
+        <span className="mr-1 block text-theme-sm font-medium">{employee?.firstname} {employee?.lastname}</span>
 
         <svg
           className={`stroke-gray-500 transition-transform duration-200 dark:stroke-gray-400 ${
@@ -59,15 +82,15 @@ export default function UserDropdown() {
       >
         <div>
           <span className="block text-theme-sm font-medium text-gray-700 dark:text-gray-400">
-            Musharof Chowdury
+          {employee?.firstname} {employee?.lastname}
           </span>
           <span className="mt-0.5 block text-theme-xs text-gray-500 dark:text-gray-400">
-            randomuser@pimjo.com
+          {employee?.email}
           </span>
         </div>
 
         <ul className="flex flex-col gap-1 border-b border-gray-200 pb-3 pt-4 dark:border-gray-800">
-          <li>
+          {/* <li>
             <DropdownItem
               onItemClick={closeDropdown}
               tag="a"
@@ -91,7 +114,7 @@ export default function UserDropdown() {
               </svg>
               Edit profile
             </DropdownItem>
-          </li>
+          </li> */}
           <li>
             <DropdownItem
               onItemClick={closeDropdown}
@@ -143,8 +166,8 @@ export default function UserDropdown() {
             </DropdownItem>
           </li>
         </ul>
-        <Link
-          href="/signin"
+        <Button
+          onClick={handleRemove}
           className="group mt-3 flex items-center gap-3 rounded-lg px-3 py-2 text-theme-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
         >
           <svg
@@ -163,7 +186,7 @@ export default function UserDropdown() {
             />
           </svg>
           Sign out
-        </Link>
+        </Button>
       </Dropdown>
     </div>
   );

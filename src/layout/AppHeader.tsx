@@ -10,15 +10,13 @@ import React, { useState, useEffect, useRef } from "react";
 const AppHeader: React.FC = () => {
   const [isApplicationMenuOpen, setApplicationMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false); // Đảm bảo chỉ render trên client
-
   const { isMobileOpen, toggleSidebar, toggleMobileSidebar } = useSidebar();
   const inputRef = useRef<HTMLInputElement>(null);
-
   // Kiểm tra khi component đã mount trên client
   useEffect(() => {
     setMounted(true);
   }, []);
-
+    
   // Chỉ chạy logic sử dụng `window` khi đã mount
   const handleToggle = () => {
     if (typeof window !== "undefined") {

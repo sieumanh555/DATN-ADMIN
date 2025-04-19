@@ -39,4 +39,8 @@ export const employeeService = {
     const response = await axios.put(`${API_URL}/user/${id}`, user);
     return response.data;
   },
+  async loginAdmin(user: { email: string; password: string }) {
+    const response = await axios.post(`${API_URL}/user/admin/login`, user);
+    return response;
+  },
 };

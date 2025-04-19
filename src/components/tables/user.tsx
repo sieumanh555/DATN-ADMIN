@@ -103,10 +103,10 @@ export default function User() {
                     </Link>
                   </TableCell>
                   <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
-                    <div className="flex -space-x-2">{users.firstname}</div>
+                    <div className="flex -space-x-2">{users.firstname} {users.lastname}</div>
                   </TableCell>
                   <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
-                    <div className="flex -space-x-2">{users.firstname}</div>
+                    <div className="flex -space-x-2">{users.email}</div>
                   </TableCell>
                   <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
                     <div className="flex -space-x-2">
@@ -114,11 +114,11 @@ export default function User() {
                         width={40}
                         height={40}
                         src={
-                          users.image.startsWith("http")
+                          users.image?.startsWith("http")
                             ? users.image
-                            : `/${users.image}`
+                            : `/${users.image || "default.jpg"}`
                         }
-                        alt={users.firstname}
+                        alt="al"
                       />
                     </div>
                   </TableCell>

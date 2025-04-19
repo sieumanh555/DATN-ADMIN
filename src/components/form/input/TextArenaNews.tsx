@@ -199,9 +199,7 @@ const TextAreaNews: React.FC<TextareaProps> = () => {
           </div>
         </div>
         <div className="rounded-b-lg bg-white px-4 py-2 dark:bg-gray-800">
-          <label className="sr-only">
-            Publish post
-          </label>
+          <label className="sr-only">Publish post</label>
           <textarea
             id="editor"
             rows={8}

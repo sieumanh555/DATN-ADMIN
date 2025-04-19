@@ -21,12 +21,12 @@ export default function SignIn() {
             <Image
               width={231}
               height={48}
-              src="./images/logo/auth-logo.svg"
+              src="/images/logo/logo.png"
               alt="Logo"
             />
           </Link>
           <p className="text-center text-gray-400 dark:text-white/60">
-            Free and Open-Source Tailwind CSS Admin Dashboard Template
+            Trang quản trị administrator của Halo-Shop
           </p>
         </div>
       </div>

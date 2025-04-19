@@ -18,10 +18,10 @@ export default function Profile() {
           Profile
         </h3>
         <div className="space-y-6">
-        <Suspense fallback={<p>Loading...</p>}>
-          <UserMetaCard />
-          <UserInfoCard />
-          <UserAddressCard />
+          <Suspense fallback={<p>Loading...</p>}>
+            <UserMetaCard />
+            <UserInfoCard />
+            <UserAddressCard />
           </Suspense>
         </div>
       </div>

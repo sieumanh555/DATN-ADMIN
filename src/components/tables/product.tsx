@@ -21,8 +21,7 @@ import type { Product } from "@/model/product_model";
 import { useEffect, useState } from "react";
 import Button from "../ui/button/Button";
 
-import * as XLSX from 'xlsx';
-
+import * as XLSX from "xlsx";
 
 import { useModal } from "@/hooks/useModal";
 import { Modal } from "../ui/modal";
@@ -48,10 +47,10 @@ export default function Product() {
   };
   const handleExport = () => {
     const wb = XLSX.utils.book_new(),
-    ws = XLSX.utils.json_to_sheet(filteredData);
-    
-    XLSX.utils.book_append_sheet(wb,ws, "MySheet1")
-    XLSX.writeFile(wb,"MyExcel.xlsx")
+      ws = XLSX.utils.json_to_sheet(filteredData);
+
+    XLSX.utils.book_append_sheet(wb, ws, "MySheet1");
+    XLSX.writeFile(wb, "MyExcel.xlsx");
   };
   const [selectedProductId, setSelectedProductId] = useState<string | null>(
     null,
@@ -85,7 +84,7 @@ export default function Product() {
   };
 
   const formatCurrency = (price?: number) => {
-    if (typeof price !== 'number') return '';
+    if (typeof price !== "number") return "";
     return price.toLocaleString("vi-VN", {
       style: "currency",
       currency: "VND",
@@ -115,7 +114,7 @@ export default function Product() {
       <div className="flex justify-between">
         <div className="relative w-full max-w-[400px]">
           <input
-            className="focus:shadow-outline w-full dark:bg-dark-900 appearance-none rounded-md border-2 border-gray-200/90 px-4 py-3 pl-10 leading-tight text-gray-800 transition-colors hover:border-gray-200/20 focus:border-blue-600 focus:outline-none focus:ring-blue-600 dark:border-gray-800 dark:bg-gray-900 dark:bg-white/[0.03] dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800 xl:w-[430px]"
+            className="focus:shadow-outline dark:bg-dark-900 w-full appearance-none rounded-md border-2 border-gray-200/90 px-4 py-3 pl-10 leading-tight text-gray-800 transition-colors hover:border-gray-200/20 focus:border-blue-600 focus:outline-none focus:ring-blue-600 dark:border-gray-800 dark:bg-gray-900 dark:bg-white/[0.03] dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800 xl:w-[430px]"
             id="username"
             type="text"
             value={keyword}
@@ -157,23 +156,23 @@ export default function Product() {
           </div>
         </div>
         <div className="flex gap-5">
-        <Button
-          onClick={handleRouter}
-          size="sm"
-          variant="primary"
-          endIcon={<BoxIcon />}
-        >
-          Thêm sản phẩm
-        </Button>
-        <Button
-          onClick={handleExport}
-          size="sm"
-          variant="primary"
-          color="green"
-          endIcon={<BoxIcon />}
-        >
-          Export
-        </Button>
+          <Button
+            onClick={handleRouter}
+            size="sm"
+            variant="primary"
+            endIcon={<BoxIcon />}
+          >
+            Thêm sản phẩm
+          </Button>
+          <Button
+            onClick={handleExport}
+            size="sm"
+            variant="primary"
+            color="green"
+            endIcon={<BoxIcon />}
+          >
+            Export
+          </Button>
         </div>
       </div>
       <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
@@ -310,10 +309,13 @@ export default function Product() {
                     </TableCell>
                     <TableCell className="whitespace-nowrap px-4 py-3 text-start text-theme-sm text-gray-500 dark:text-gray-400">
                       <div className="flex -space-x-2">
-                      {typeof products.category === 'object' && products.category !== null && 'categoryName' in products.category
-                        ? products.category.categoryName
-                        : 'Không có danh mục' // Or some other default value if category is not populated
-                      }
+                        {
+                          typeof products.category === "object" &&
+                          products.category !== null &&
+                          "categoryName" in products.category
+                            ? products.category.categoryName
+                            : "Không có danh mục" // Or some other default value if category is not populated
+                        }
                       </div>
                     </TableCell>
                     <TableCell className="whitespace-nowrap px-4 py-3 text-start text-theme-sm text-gray-500 dark:text-gray-400">
