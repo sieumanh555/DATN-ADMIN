@@ -11,8 +11,10 @@ import { DropdownItem } from "../ui/dropdown/DropdownItem";
 const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
-
-export default function MonthlyTarget() {
+interface MonthlyTargetProps {
+  name1: string;
+}
+export default function MonthlyTarget(props: MonthlyTargetProps) {
   const series = [75.55];
   const options: ApexOptions = {
     colors: ["#465FFF"],
@@ -78,7 +80,7 @@ export default function MonthlyTarget() {
         <div className="flex justify-between">
           <div>
             <h3 className="text-lg font-semibold text-gray-800 dark:text-white/90">
-              Monthly Target
+              {props.name1}
             </h3>
             <p className="mt-1 text-theme-sm font-normal text-gray-500 dark:text-gray-400">
               Target you’ve set for each month

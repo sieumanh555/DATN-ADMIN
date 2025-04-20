@@ -68,14 +68,16 @@ const tableData: Product[] = [
     image: "/images/product/product-05.jpg", // Replace with actual image URL
   },
 ];
-
-export default function RecentOrders() {
+interface RecentOrdersProps {
+  name1: string;
+}
+export default function RecentOrders(props: RecentOrdersProps) {
   return (
     <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white px-4 pb-3 pt-4 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6">
       <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h3 className="text-lg font-semibold text-gray-800 dark:text-white/90">
-            Recent Orders
+            {props.name1}
           </h3>
         </div>
 
