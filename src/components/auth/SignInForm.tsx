@@ -40,7 +40,7 @@ const handleLogin = async (values: { email: string; password: string }) => {
       setSuccessMessages(true); // Ẩn thông báo thành công sau 3 giây
     } catch (error) {
       console.error("Lỗi khi thêm:", error);
-      alert("Thêm sản phẩm thất bại. Vui lòng thử lại.");
+      alert("Đăng nhập thất bại. Vui lòng thử lại.");
     }
   };
     useEffect(() => {
