@@ -21,10 +21,13 @@ import { orderService } from "@/services/order_controller";
 export default function Order() {
   const [order, setOrder] = useState<Order[]>([]);
   useEffect(() => {
-    orderService.getAllOrder().then(setOrder);
+    orderService
+      .getAllOrder()
+      .then(setOrder)
+      .catch((error) => {
+        console.error("Failed to fetch orders", error);
+      });
   }, []);
-
-  console.log(order);
   
 
   return (

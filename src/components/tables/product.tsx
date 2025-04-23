@@ -27,12 +27,21 @@ import { useModal } from "@/hooks/useModal";
 import { Modal } from "../ui/modal";
 import { useRouter } from "next/navigation"; // For Next.js 13 and above
 import { BoxIcon } from "@/icons";
+import { useRef } from "react";
+import { useReactToPrint } from 'react-to-print';
 export default function Product() {
   const [products, setProducts] = useState<Product[]>([]);
   const { isOpen, openModal, closeModal } = useModal();
   const [isLoading, setIsLoading] = useState(true); // State để xử lý hiệu ứng loading
   const router = useRouter();
   const [keyword, setKeyword] = useState("");
+  const contentRef = useRef<HTMLTableSectionElement>(null); // ✅ tbody là HTMLTableSectionElement
+
+  const reactToPrintFn = useReactToPrint({ 
+    contentRef,
+    pageStyle: '@page { size: auto; margin: 0mm; }', // Tùy chỉnh style trang in
+   });
+  
 
   const filteredData = useMemo(() => {
     return products.filter(
@@ -52,6 +61,12 @@ export default function Product() {
     XLSX.utils.book_append_sheet(wb, ws, "MySheet1");
     XLSX.writeFile(wb, "MyExcel.xlsx");
   };
+  const handlePrint = () => {
+    setTimeout(() => {
+      reactToPrintFn();
+    }, 500); // Đợi 500ms trước khi in
+  };
+  
   const [selectedProductId, setSelectedProductId] = useState<string | null>(
     null,
   );
@@ -173,6 +188,15 @@ export default function Product() {
           >
             Export
           </Button>
+          <Button
+            onClick={handlePrint}
+            size="sm"
+            variant="primary"
+            color="pink"
+            endIcon={<BoxIcon />}
+          >
+            Print
+          </Button>
         </div>
       </div>
       <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
@@ -263,7 +287,7 @@ export default function Product() {
                 </TableRow>
               </TableHeader>
 
-              <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05]">
+              <TableBody ref={contentRef} className="divide-y divide-gray-100 dark:divide-white/[0.05]">
                 {filteredData.map((products, index) => (
                   <TableRow key={products._id}>
                     <TableCell className="px-5 py-4 text-start sm:px-6">

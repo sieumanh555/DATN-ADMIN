@@ -4,7 +4,7 @@ interface ButtonProps {
   children: ReactNode; // Button text or content
   size?: "sm" | "md"; // Button size
   variant?: "primary" | "outline"; // Button variant
-  color?: "blue" | "red" | "green" | "gray"; // Màu sắc
+  color?: "blue" | "red" | "green" | "gray" | "pink"; // Màu sắc
   startIcon?: ReactNode; // Icon before the text
   endIcon?: ReactNode; // Icon after the text
   onClick?: () => void; // Click handler
@@ -53,6 +53,11 @@ const Button: React.FC<ButtonProps> = ({
       primary: "bg-gray-500 text-white hover:bg-gray-600 disabled:bg-gray-300",
       outline:
         "text-gray-500 ring-1 ring-gray-500 hover:bg-gray-50 disabled:text-gray-300 disabled:ring-gray-300",
+    },
+    pink: {
+      primary: "bg-pink-500 text-white hover:bg-pink-600 disabled:bg-pink-300",
+      outline:
+        "text-pink-500 ring-1 ring-pink-500 hover:bg-pink-50 disabled:text-pink-300 disabled:ring-pink-300",
     },
   };
 

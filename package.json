@@ -37,6 +37,7 @@
     "react-dropzone": "^14.3.5",
     "react-flatpickr": "^3.10.13",
     "react-spinners": "^0.15.0",
+    "react-to-print": "^3.0.6",
     "swiper": "^11.2.0",
     "tailwind-merge": "^2.6.0",
     "xlsx": "^0.18.5",
