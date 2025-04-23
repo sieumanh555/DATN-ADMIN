@@ -24,6 +24,7 @@ export interface Product {
   quantity: number;
   hot: number;
   view: number;
+  location: string;
   rating: number;
   status: string;
   category: string | Category;

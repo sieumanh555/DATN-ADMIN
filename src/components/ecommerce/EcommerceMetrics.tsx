@@ -17,6 +17,8 @@ interface EcommerceMetricsProps {
   icon2Name?: string;
   itemBackgroundColor1?: string; // Prop màu nền
   itemBackgroundColor2?: string; // Prop màu nền
+  value1: number;
+  value2: number;
 }
 
 const heroIcons = {
@@ -53,7 +55,7 @@ export const EcommerceMetrics = (props: EcommerceMetricsProps) => {
               {props.name1}
             </span>
             <h4 className="mt-2 text-title-sm font-bold text-gray-800 dark:text-white/90">
-              3,782
+              {props.value1}
             </h4>
           </div>
           <Badge color="success">
@@ -75,7 +77,7 @@ export const EcommerceMetrics = (props: EcommerceMetricsProps) => {
               {props.name2}
             </span>
             <h4 className="mt-2 text-title-sm font-bold text-gray-800 dark:text-white/90">
-              5,359
+              {props.value2}
             </h4>
           </div>
 

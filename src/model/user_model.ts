@@ -1,6 +1,7 @@
 export interface User {
   _id: string;
   kyc_id: string;
+  name: string;
   firstname: string;
   lastname: string;
   phone: string;

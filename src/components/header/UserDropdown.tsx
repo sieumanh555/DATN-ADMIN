@@ -25,7 +25,6 @@ export default function UserDropdown() {
         .then((response) => setEmployee(response))
         .catch((error) => console.error("Lỗi khi lấy user:", error))
     }, [userId]);
-    console.log(employee);
 
   function toggleDropdown() {
     setIsOpen(!isOpen);

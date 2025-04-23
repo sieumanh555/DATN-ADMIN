@@ -7,14 +7,12 @@ const API_URL = "https://datn-api-production.up.railway.app"; // Đổi thành A
 export const voucherService = {
   async getAllVoucher(): Promise<Voucher[]> {
     const response = await axios.get(`${API_URL}/voucher`);
-    console.log(response.data);
     return response.data;
   },
 };
 export const disvoucherService = {
   async getAlldisVoucher(): Promise<Disvoucher[]> {
     const response = await axios.get(`${API_URL}/litmitvc`);
-    console.log(response.data);
     return response.data;
   },
 };

@@ -8,6 +8,10 @@ export const userService = {
     const response = await axios.get(`${API_URL}/user`);
     return response.data;
   },
+  async getAllNewUser(): Promise<User[]> {
+    const response = await axios.get(`${API_URL}/user/newuser`);
+    return response.data;
+  },
   async getUser(id: string): Promise<User> {
     const response = await axios.get(`${API_URL}/user/${id}`);
     return response.data.data;

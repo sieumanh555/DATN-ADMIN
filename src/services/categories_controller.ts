@@ -6,12 +6,10 @@ const API_URL = "https://datn-api-production.up.railway.app"; // Đổi thành A
 export const categoryService = {
   async getAllCategory(): Promise<Categories[]> {
     const response = await axios.get(`${API_URL}/category`);
-    console.log(response.data);
     return response.data;
   },
   async createCategory(category: { name: string; status: string }) {
     const response = await axios.post(`${API_URL}/category`, category);
-    console.log(response.data);
     return response; // ← trả nguyên object response
   },
   async deleteCategory(id: string) {

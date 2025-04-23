@@ -8,8 +8,6 @@ export const productService = {
   // Lấy danh sách sản phẩm
   async getProducts(): Promise<Product[]> {
     const response = await axios.get(`${API_URL}/product`);
-    console.log(response.data);
-
     return response.data;
   },
   // Lấy 1 sản phẩm theo ID

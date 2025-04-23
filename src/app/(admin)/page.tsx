@@ -1,4 +1,5 @@
-import type { Metadata } from "next";
+"use client"
+// import type { Metadata } from "next";
 import { EcommerceMetrics } from "@/components/ecommerce/EcommerceMetrics";
 import React from "react";
 import MonthlyTarget from "@/components/ecommerce/MonthlyTarget";
@@ -7,23 +8,34 @@ import MonthlyTarget from "@/components/ecommerce/MonthlyTarget";
 import RecentOrders from "@/components/ecommerce/RecentOrders";
 // import DemographicCard from "@/components/ecommerce/DemographicCard";
 
+import { useProduct_Data } from "@/components/ecommerce_client/financial";
 
-export const metadata: Metadata = {
-  title: "HaloShop E-commerce Dashboard",
-  description: "Halo Shop - Web Bán Giày",
-};
+// export const metadata: Metadata = {
+//   title: "HaloShop E-commerce Dashboard",
+//   description: "Halo Shop - Web Bán Giày",
+// };
+
+
 
 export default function Ecommerce() {
+  const { product, user, newuser, voucher, category, order, orderfailed } = useProduct_Data();
+  const totalProduct = product.length;
+  const totalUser = user.length;
+  const totalNewuser = newuser.length;
+  const totalVoucher = voucher.length;
+  const totalCategory = category.length;
+  const totalOrder = order.length;
+  const totalorderfailed = orderfailed.length
   return (
     <div className="grid grid-cols-12 gap-4 md:gap-6">
       <div className="col-span-6 space-y-6 xl:col-span-6">
-        <EcommerceMetrics name1="Khách hàng"  name2="Khách hàng mới" icon1Name="UserGroupIcon" icon2Name="UserIcon" itemBackgroundColor1="lightgreen" itemBackgroundColor2="lightblue" />
-        <EcommerceMetrics name1="Tổng sản phẩm"  name2="Tổng danh mục" icon1Name="CircleStackIcon"icon2Name="Bars4Icon" itemBackgroundColor1="skyblue" itemBackgroundColor2="teal"/>
+        <EcommerceMetrics name1="Khách hàng"  name2="Khách hàng mới" icon1Name="UserGroupIcon" icon2Name="UserIcon" itemBackgroundColor1="lightgreen" itemBackgroundColor2="lightblue" value1={totalUser} value2={totalNewuser} />
+        <EcommerceMetrics name1="Tổng sản phẩm"  name2="Tổng danh mục" icon1Name="CircleStackIcon"icon2Name="Bars4Icon" itemBackgroundColor1="skyblue" itemBackgroundColor2="lavender" value1={totalProduct} value2={totalCategory}/>
       {/* <MonthlySalesChart /> */}
       </div>
       <div className="col-span-6 space-y-6 xl:col-span-6">
-        <EcommerceMetrics name1="Đơn hàng đang xử lý"  name2="Tổng đơn hàng 1 ngày" icon1Name="Bars2Icon"icon2Name="Bars3BottomLeftIcon" itemBackgroundColor1="aquamarine" itemBackgroundColor2="lightsteelblue"/>
-        <EcommerceMetrics name1="Tổng đơn hàng"  name2="Tổng phiếu Voucher" icon1Name="Bars3BottomRightIcon"icon2Name="RectangleStackIcon" itemBackgroundColor1="powderblue" itemBackgroundColor2="lavender"/>
+        <EcommerceMetrics name1="Đơn hàng đang xử lý"  name2="Tổng đơn hàng 1 ngày" icon1Name="Bars2Icon"icon2Name="Bars3BottomLeftIcon" itemBackgroundColor1="aquamarine" itemBackgroundColor2="lightsteelblue" value1={totalorderfailed} value2={totalNewuser}/>
+        <EcommerceMetrics name1="Tổng đơn hàng"  name2="Tổng phiếu Voucher" icon1Name="Bars3BottomRightIcon"icon2Name="RectangleStackIcon" itemBackgroundColor1="powderblue" itemBackgroundColor2="lavender" value1={totalOrder} value2={totalVoucher}/>
       </div>
       <div className="col-span-12 space-y-6 xl:col-span-6">
         <MonthlyTarget name1="Tổng doanh thu COD"/>
