@@ -6,24 +6,15 @@ import {
   TableRow,
 } from "../ui/table";
 import Badge from "../ui/badge/Badge";
-import { Order } from "@/model/order_model";
-import { format } from "date-fns";
-import { vi } from "date-fns/locale"; // Import locale nếu cần
+import Image from "next/image";
+import type { User } from "@/model/user_model";
 
 
 interface RecentOrdersProps {
   name1: string;
-  data: Order[];
+  data: User[];
 }
-
-export default function RecentOrders(props: RecentOrdersProps) {
-  const formatCurrency = (price?: number) => {
-    if (typeof price !== "number") return "";
-    return price.toLocaleString("vi-VN", {
-      style: "currency",
-      currency: "VND",
-    });
-  };
+export default function RecentUser(props: RecentOrdersProps) {
   return (
     <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white px-4 pb-3 pt-4 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6">
       <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
@@ -92,37 +83,19 @@ export default function RecentOrders(props: RecentOrdersProps) {
                 isHeader
                 className="py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
               >
-                ID Order
+                Username
               </TableCell>
               <TableCell
                 isHeader
                 className="py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
               >
-                Name
+                Email
               </TableCell>
               <TableCell
                 isHeader
                 className="py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
               >
-                paymentMethod
-              </TableCell>
-              <TableCell
-                isHeader
-                className="py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
-              >
-                paymentStatus
-              </TableCell>
-              <TableCell
-                isHeader
-                className="py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
-              >
-                shippingMethod
-              </TableCell>
-              <TableCell
-                isHeader
-                className="py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
-              >
-                Amount
+                Image
               </TableCell>
               <TableCell
                 isHeader
@@ -136,46 +109,44 @@ export default function RecentOrders(props: RecentOrdersProps) {
           {/* Table Body */}
 
           <TableBody className="divide-y divide-gray-100 dark:divide-gray-800">
-            {props.data.map((order, index ) => (
-              <TableRow key={order._id} className="">
+            {props.data.map((user, index ) => (
+              <TableRow key={user._id} className="">
                                 <TableCell className="py-3 text-theme-sm text-gray-500 dark:text-gray-400">
                   {index + 1}
                 </TableCell>
                 <TableCell className="py-3 text-theme-sm text-gray-500 dark:text-gray-400">
-                  {order.uniqueKey}
+                  {user.name}
                 </TableCell>
                 <TableCell className="py-3 text-theme-sm text-gray-500 dark:text-gray-400">
-                {order.userId?.name || "Không có tên"}
+                  {user.email}
                 </TableCell>
-                <TableCell className="py-3 text-theme-sm text-gray-500 dark:text-gray-400">
-                  {order.paymentMethod}
-                </TableCell>
-                <TableCell className="py-3 text-theme-sm text-gray-500 dark:text-gray-400">
-                  {order.paymentStatus}
-                </TableCell>
-                <TableCell className="py-3 text-theme-sm text-gray-500 dark:text-gray-400">
-                  {order.shippingMethod}
-                </TableCell>
-                <TableCell className="py-3 text-theme-sm text-gray-500 dark:text-gray-400">
-                  {formatCurrency(order.amount)}
-                </TableCell>
-                <TableCell className="py-3 text-theme-sm text-gray-500 dark:text-gray-400">
-                                        {format(order.createdAt, "dd/MM/yyyy HH:mm:ss", {
-                                          locale: vi,
-                                        })}
+                <TableCell className="py-3">
+                    <div className="h-[50px] w-[50px] overflow-hidden rounded-md">
+                      <Image
+                        width={50}
+                        height={50}
+                        src={
+                          user.image?.startsWith("http")
+                            ? user.image
+                            : `/${user.image || "default.jpg"}`
+                        }
+                        className="h-[50px] w-[50px]"
+                        alt={"none"}
+                      />
+                    </div>
                 </TableCell>
                 <TableCell className="py-3 text-theme-sm text-gray-500 dark:text-gray-400">
                   <Badge
                     size="sm"
                     color={
-                      order.status === "Delivered"
+                      user.status === "On"
                         ? "success"
-                        : order.status === "Processing"
+                        : user.status === "Off"
                           ? "warning"
                           : "error"
                     }
                   >
-                    {order.status}
+                    {user.status}
                   </Badge>
                 </TableCell>
               </TableRow>

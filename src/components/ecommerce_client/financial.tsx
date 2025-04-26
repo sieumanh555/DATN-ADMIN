@@ -19,6 +19,7 @@ export const useProduct_Data = () => {
   const [category, setCategory] = useState<Categories[]>([]);
   const [order, setOrder]  = useState<Order[]>([]);
   const [orderfailed, setOrderfailed]  = useState<Order[]>([]);
+  const [ordertoday, setOrdertoday]  = useState<Order[]>([]);
   // Lấy thông tin sản phẩm
   useEffect(() => {
     const fetchProduct = async () => {
@@ -98,5 +99,16 @@ export const useProduct_Data = () => {
     };
     fetchProduct();
   }, []);
-  return { product, user, newuser, voucher, category, order,orderfailed };
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const response = await orderService.getAllOrderToDay();
+        setOrdertoday(response);
+      } catch (error) {
+        console.error("Lỗi khi lấy sản phẩm:", error);
+      }
+    };
+    fetchProduct();
+  }, []);
+  return { product, user, newuser, voucher, category, order,orderfailed, ordertoday };
 };

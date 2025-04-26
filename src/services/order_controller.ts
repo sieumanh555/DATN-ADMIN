@@ -12,6 +12,10 @@ export const orderService = {
     const response = await axios.get(`${API_URL}/order/orderfailed`);
     return response.data.data;
   },
+  async getAllOrderToDay(): Promise<Order[]> {
+    const response = await axios.get(`${API_URL}/order/orderday`);
+    return response.data.data;
+  },
   async getOrderById(id: string): Promise<Order> {
     const response = await axios.get(`${API_URL}/order/${id}`);
     return response.data;

@@ -9,6 +9,8 @@ import RecentOrders from "@/components/ecommerce/RecentOrders";
 // import DemographicCard from "@/components/ecommerce/DemographicCard";
 
 import { useProduct_Data } from "@/components/ecommerce_client/financial";
+import RecentOrders1 from "@/components/ecommerce/RecentOrder1";
+import RecentUser from "@/components/ecommerce/RecentUser";
 
 // export const metadata: Metadata = {
 //   title: "HaloShop E-commerce Dashboard",
@@ -18,7 +20,7 @@ import { useProduct_Data } from "@/components/ecommerce_client/financial";
 
 
 export default function Ecommerce() {
-  const { product, user, newuser, voucher, category, order, orderfailed } = useProduct_Data();
+  const { product, user, newuser, voucher, category, order, orderfailed, ordertoday } = useProduct_Data();
   const totalProduct = product.length;
   const totalUser = user.length;
   const totalNewuser = newuser.length;
@@ -26,6 +28,8 @@ export default function Ecommerce() {
   const totalCategory = category.length;
   const totalOrder = order.length;
   const totalorderfailed = orderfailed.length
+  const totalordertoday = ordertoday.length;
+  
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-12 md:gap-6">
   <div className="col-span-1 md:col-span-2 lg:col-span-6 space-y-6">
@@ -60,7 +64,7 @@ export default function Ecommerce() {
       itemBackgroundColor1="aquamarine"
       itemBackgroundColor2="lightsteelblue"
       value1={totalorderfailed}
-      value2={totalNewuser}
+      value2={totalordertoday}
     />
     <EcommerceMetrics
       name1="Tổng đơn hàng"
@@ -89,13 +93,13 @@ export default function Ecommerce() {
         <DemographicCard />
       </div> */}
   <div className="col-span-1 md:col-span-2 lg:col-span-12 space-y-6">
-    <RecentOrders name1="Bảng thống kê người dùng mới" />
+    <RecentUser name1="Bảng thống kê người dùng mới" data={newuser}/>
   </div>
   <div className="col-span-1 md:col-span-2 lg:col-span-12 space-y-6">
-    <RecentOrders name1="Bảng thống kê đơn hàng đang chờ xử lý" />
+    <RecentOrders name1="Bảng thống kê đơn hàng đang chờ xử lý" data={orderfailed}/>
   </div>
   <div className="col-span-1 md:col-span-2 lg:col-span-12 space-y-6">
-    <RecentOrders name1="Bảng thống kê đơn hàng 1 ngày" />
+    <RecentOrders1 name1="Bảng thống kê đơn hàng 1 ngày" data={ordertoday}/>
   </div>
 </div>
   );

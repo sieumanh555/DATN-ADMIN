@@ -122,8 +122,12 @@ export default function User() {
                       <Image
                         width={40}
                         height={40}
-                        src={eployees.image}
-                        alt={eployees.firstname}
+                        src={
+                          eployees.image?.startsWith("http")
+                            ? eployees.image
+                            : `/${eployees.image || "default.jpg"}`
+                        }
+                        alt={"none"}
                       />
                     </div>
                   </TableCell>

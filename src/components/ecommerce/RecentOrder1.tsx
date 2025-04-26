@@ -16,7 +16,7 @@ interface RecentOrdersProps {
   data: Order[];
 }
 
-export default function RecentOrders(props: RecentOrdersProps) {
+export default function RecentOrders1(props: RecentOrdersProps) {
   const formatCurrency = (price?: number) => {
     if (typeof price !== "number") return "";
     return price.toLocaleString("vi-VN", {
