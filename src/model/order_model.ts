@@ -1,5 +1,6 @@
 import { User } from "./user_model";
 import { Product } from "./product_model";
+import { Voucher } from "./voucher_model";
 export interface Order {
     _id: string;
     uniqueKey?: string;
@@ -7,7 +8,7 @@ export interface Order {
     orderDetailId: OrderItem;
     amount: number;
     description?: string;
-    voucherId?: string;
+    voucherId?: Voucher;
     voucherValue?: number;
     address: string;
     paymentMethod: string;

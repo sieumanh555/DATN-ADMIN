@@ -22,6 +22,9 @@ export default function Voucher() {
     voucherService.getAllVoucher().then(setVoucher);
   }, []);
 
+  console.log(voucher);
+  
+
   return (
     <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
       <div className="max-w-full overflow-x-auto">
@@ -118,9 +121,9 @@ export default function Voucher() {
                     <Badge
                       size="sm"
                       color={
-                        items.status === "Active"
+                        items.status === "active"
                           ? "success"
-                          : items.status === "Pending"
+                          : items.status === "expired"
                             ? "warning"
                             : "error"
                       }

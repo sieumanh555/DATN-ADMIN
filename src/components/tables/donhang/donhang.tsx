@@ -1,4 +1,4 @@
-"use client";
+'use client'
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import {
@@ -20,6 +20,7 @@ import { orderService } from "@/services/order_controller";
 
 export default function Order() {
   const [order, setOrder] = useState<Order[]>([]);
+  
   useEffect(() => {
     orderService
       .getAllOrder()
@@ -28,6 +29,14 @@ export default function Order() {
         console.error("Failed to fetch orders", error);
       });
   }, []);
+  console.log(order);
+  const formatCurrency = (price?: number) => {
+    if (typeof price !== "number") return "";
+    return price.toLocaleString("vi-VN", {
+      style: "currency",
+      currency: "VND",
+    });
+  };
   
   return (
     <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
@@ -119,73 +128,73 @@ export default function Order() {
             </TableHeader>
 
             <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05]">
-              {order.map((order, index) => (
-                <TableRow key={order._id}>
+              {order.map((orders, index) => (
+                <TableRow key={orders._id}>
                   <TableCell className="px-5 py-4 text-start sm:px-6">
                     <div className="flex items-center gap-3">{index + 1}</div>
                   </TableCell>
                   <TableCell className="px-4 py-3 text-start text-theme-sm text-gray-500 underline dark:text-gray-400 sm:px-6">
                     <Link
-                     href={`/chitietdh?id=${order.orderDetailId._id}`} // Thêm _id vào query
+                     href={`/chitietdh?id=${orders.orderDetailId._id}`}
                       className="font-medium text-blue-600 hover:underline dark:text-blue-500"
                     >
-                      {order.uniqueKey}
+                      {orders.uniqueKey}
                     </Link>
                   </TableCell>
                   <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
-                    <div className="flex -space-x-2">{order.userId.name}</div>
+                    <div className="flex -space-x-2">{orders.userId?.name}</div>
                   </TableCell>
                   <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
-                        {format(order.createdAt, "dd/MM/yyyy HH:mm:ss", {
-                          locale: vi,
-                        })}
+                      {format(orders.createdAt, "dd/MM/yyyy HH:mm:ss", {
+                        locale: vi,
+                      })}
                   </TableCell>
                   <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
                   <div className="flex -space-x-2">
-                    {order.description ? order.description : "Không có ghi chú"}
+                    {orders.description ? orders.description : "Không có ghi chú"}
                   </div>
                   </TableCell>
                   <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
-                    <div className="flex -space-x-2">{order.voucherId}</div>
+                    <div className="flex -space-x-2">{orders.voucherId?.code}</div>
                   </TableCell>
                   <TableCell className="px-4 py-3 text-start text-theme-sm text-gray-500 dark:text-gray-400">
-                    <div className="flex -space-x-2">{order.amount}</div>
+                    <div className="flex -space-x-2">{formatCurrency(orders.amount)}</div>
                   </TableCell>
                   <TableCell className="px-4 py-3 text-start text-theme-sm text-gray-500 dark:text-gray-400">
-                    <div className="flex -space-x-2">{order.shipping}</div>
+                    <div className="flex -space-x-2">{orders.shipping}</div>
                   </TableCell>
                   <TableCell className="px-4 py-3 text-start text-theme-sm text-gray-500 dark:text-gray-400">
-                    <div className="flex -space-x-2">{order.shippingMethod}</div>
+                    <div className="flex -space-x-2">{orders.shippingMethod}</div>
                   </TableCell>
                   <TableCell className="px-4 py-3 text-start text-theme-sm text-gray-500 dark:text-gray-400">
-                    <div className="flex -space-x-2">{order.paymentStatus}</div>
+                    <div className="flex -space-x-2">{orders.paymentStatus}</div>
                   </TableCell>
                   <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
-                    <div className="flex -space-x-2">{order.paymentMethod}</div>
+                    <div className="flex -space-x-2">{orders.paymentMethod}</div>
                   </TableCell>
                   <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
                     <div className="flex -space-x-2">
                       <Badge
                         size="sm"
                         color={
-                          order.status === "Processing"
+                          orders.status === "Processing"
                             ? "warning" // Màu vàng/cam cho trạng thái đang xử lý
-                            : order.status === "Shipped"
+                            : orders.status === "Shipped"
                             ? "primary" // Màu xanh dương cho trạng thái đã giao hàng
-                            : order.status === "Delivered"
+                            : orders.status === "Delivered"
                             ? "success" // Màu xanh lá cây cho trạng thái đã nhận hàng
-                            : order.status === "Cancelled"
+                            : orders.status === "Cancelled"
                             ? "error" // Màu đỏ cho trạng thái đã hủy
                             : "primary" // Màu mặc định nếu không khớp với trạng thái nào
                         }
                       >
-                        {order.status}
+                        {orders.status}
                       </Badge>
                     </div>
                   </TableCell>
                   <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
                     <div className="flex gap-5 -space-x-2">
-                      <Link href="/orderDetail">
+                      <Link href={`/chitietdh?id=${orders.orderDetailId._id}`}>
                         <EyeIcon className="cursor-pointer text-green-500" />
                       </Link>
                       <TrashBinIcon className="cursor-pointer" />

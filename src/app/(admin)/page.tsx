@@ -1,5 +1,4 @@
 "use client"
-// import type { Metadata } from "next";
 import { EcommerceMetrics } from "@/components/ecommerce/EcommerceMetrics";
 import React from "react";
 import MonthlyTarget from "@/components/ecommerce/MonthlyTarget";
@@ -11,11 +10,6 @@ import RecentOrders from "@/components/ecommerce/RecentOrders";
 import { useProduct_Data } from "@/components/ecommerce_client/financial";
 import RecentOrders1 from "@/components/ecommerce/RecentOrder1";
 import RecentUser from "@/components/ecommerce/RecentUser";
-
-// export const metadata: Metadata = {
-//   title: "HaloShop E-commerce Dashboard",
-//   description: "Halo Shop - Web Bán Giày",
-// };
 
 
 
