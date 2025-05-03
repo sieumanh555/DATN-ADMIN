@@ -137,7 +137,7 @@ export default function UserInfoCard() {
                   First Name
                 </p>
                 <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                  {user.firstname}
+                  {user.firstname} {user.name}
                 </p>
               </div>
 
@@ -146,7 +146,7 @@ export default function UserInfoCard() {
                   Last Name
                 </p>
                 <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                  {user.lastname}
+                  {user.lastname} {user.name}
                 </p>
               </div>
 
@@ -167,7 +167,6 @@ export default function UserInfoCard() {
                   {user.phone}
                 </p>
               </div>
-
               <div>
                 <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
                   Birthday

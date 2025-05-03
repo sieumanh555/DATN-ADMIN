@@ -10,7 +10,7 @@ import {
   ShoppingBagIcon,
   CircleStackIcon,
   ChatBubbleLeftRightIcon,
-  BookOpenIcon,
+  // BookOpenIcon,
   BanknotesIcon,
   UserCircleIcon,
   ClipboardDocumentCheckIcon,
@@ -56,14 +56,14 @@ const navItems: NavItem[] = [
     icon: <ChatBubbleLeftRightIcon className="h-6 w-6" />,
     subItems: [{ name: "Feedback List", path: "/danhgia", pro: false }],
   },
-  {
-    name: "News List",
-    icon: <BookOpenIcon className="h-6 w-6" />,
-    subItems: [
-      { name: "News Management", path: "/tintuc", pro: false },
-      { name: "News Settings", path: "/news", pro: false },
-    ],
-  },
+  // {
+  //   name: "News List",
+  //   icon: <BookOpenIcon className="h-6 w-6" />,
+  //   subItems: [
+  //     { name: "News Management", path: "/tintuc", pro: false },
+  //     { name: "News Settings", path: "/news", pro: false },
+  //   ],
+  // },
   {
     name: "Voucher List",
     icon: <BanknotesIcon className="h-6 w-6" />,

@@ -7,7 +7,7 @@ import React from "react";
 export default function Tintuc() {
   return (
     <div>
-      <PageBreadcrumb pageTitle="Task Kanban" />
+      <PageBreadcrumb pageTitle="Quản lý sản phẩm" />
       <div className="space-y-6">
         <ComponentCard title="Sản phẩm">
           <News />

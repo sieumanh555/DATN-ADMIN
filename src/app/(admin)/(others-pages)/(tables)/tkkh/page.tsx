@@ -7,9 +7,9 @@ import React from "react";
 export default function SanPham() {
   return (
     <div>
-      <PageBreadcrumb pageTitle="Task Kanban" />
+      <PageBreadcrumb pageTitle="Quản lý khách hàng" />
       <div className="space-y-6">
-        <ComponentCard title="Sản phẩm">
+        <ComponentCard title="Khách hàng">
           <User />
         </ComponentCard>
       </div>

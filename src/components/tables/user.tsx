@@ -103,7 +103,7 @@ export default function User() {
                     </Link>
                   </TableCell>
                   <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
-                    <div className="flex -space-x-2">{users.firstname} {users.lastname}</div>
+                    <div className="flex -space-x-2">{users.firstname} {users.lastname} {users.name}</div>
                   </TableCell>
                   <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
                     <div className="flex -space-x-2">{users.email}</div>
