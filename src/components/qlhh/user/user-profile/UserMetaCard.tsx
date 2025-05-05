@@ -37,8 +37,6 @@ export default function UserMetaCard() {
       .finally(() => setLoading(false));
   }, [id]);
 
-  console.log(user);
-
   if (!id) return <p>Không tìm thấy ID sản phẩm</p>;
   if (loading) return <p>Đang tải...</p>;
 

@@ -20,6 +20,8 @@ export default function Feedback() {
   useEffect(() => {
     commentsService.getAllComments().then(setComments);
   }, []);
+  console.log(comments);
+  
   return (
     <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
       <div className="max-w-full overflow-x-auto">
@@ -92,10 +94,10 @@ export default function Feedback() {
                     <div className="flex items-center gap-3">{index + 1}</div>
                   </TableCell>
                   <TableCell className="px-4 py-3 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
-                    {items.sku_id}
+                    {items.sky_id}
                   </TableCell>
                   <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
-                    <div className="flex -space-x-2">{items.user.name}</div>
+                    <div className="flex -space-x-2">{items.user.firstname} {items.user.lastname}</div>
                   </TableCell>
                   <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
                     <div className="flex -space-x-2">
@@ -128,7 +130,6 @@ export default function Feedback() {
                 </TableRow>
               ))}
             </TableBody>
-
             {/* Table Body
             <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05]">
               {tableData.map((order) => (

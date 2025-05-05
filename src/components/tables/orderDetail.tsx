@@ -11,16 +11,22 @@ import {
 import { EyeIcon, TrashBinIcon } from "@/icons";
 import { useSearchParams } from "next/navigation";
 import { orderItemService } from "@/services/order_controller";
+import { orderService } from "@/services/order_controller";
 import { format } from "date-fns";
 import { vi } from "date-fns/locale";
 import Image from "next/image";
 import type { OrderItemGroup } from "@/model/order_model";
+import Shipping from "../ui/shipping";
+import AcceptShipping from "../ui/shipping/accepts";
+import type { Order } from "@/model/order_model";
 
 export default function Order() {
+
   const searchParams = useSearchParams();
   const id = searchParams.get("id"); // Lấy id từ URL query params
   const [order, setOrderDetail] = useState<OrderItemGroup | null>(null);
-
+  const [orders, setOrder] = useState<Order | null>(null);
+  const [localOrderId, setLocalOrderId] = useState<string | null>(null);
   useEffect(() => {
     if (!id) return;
     orderItemService
@@ -28,8 +34,35 @@ export default function Order() {
       .then((response) => setOrderDetail(response))
       .catch((error) => console.error("Lỗi fetching order items:", error));
   }, [id]);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const storedId = window.localStorage.getItem('id_order');
+      setLocalOrderId(storedId);
+    }
+  }, []);
   
+  useEffect(() => {
+    if (!localOrderId) {
+      return;
+    }
+
+    orderService
+      .getOrderById(localOrderId)
+      .then((response) => setOrder(response))
+      .catch((error) => console.error("Lỗi fetching đơn hàng:", error));
+  }, [localOrderId]); 
+  console.log(orders);
+  
+
+
+  useEffect(() => {
+    if (id) {
+      console.log("ID từ router:", id);
+    }
+  }, [id]);
   return (
+    <>
     <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
       <div className="max-w-full overflow-x-auto">
         <div className="min-w-[1102px]">
@@ -173,5 +206,8 @@ export default function Order() {
         </div>
       </div>
     </div>
+      <AcceptShipping data={orders}/>
+      <Shipping data={orders}/>
+    </>
   );
 }

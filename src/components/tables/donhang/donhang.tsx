@@ -10,9 +10,9 @@ import {
 } from "../../ui/table";
 
 import Badge from "../../ui/badge/Badge";
-import { EyeIcon, TrashBinIcon } from "@/icons";
 import { format } from "date-fns";
 import { vi } from "date-fns/locale";
+import Button from "@/components/ui/button/Button";
 
 
 import type { Order } from "@/model/order_model";
@@ -20,6 +20,9 @@ import { orderService } from "@/services/order_controller";
 
 export default function Order() {
   const [order, setOrder] = useState<Order[]>([]);
+
+
+
   
   useEffect(() => {
     orderService
@@ -37,7 +40,11 @@ export default function Order() {
       currency: "VND",
     });
   };
-  
+
+  const saveId =  (id: string) => {
+     window.localStorage.setItem("id_order", id);
+  }
+
   return (
     <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
       <div className="max-w-full overflow-x-auto">
@@ -133,16 +140,11 @@ export default function Order() {
                   <TableCell className="px-5 py-4 text-start sm:px-6">
                     <div className="flex items-center gap-3">{index + 1}</div>
                   </TableCell>
-                  <TableCell className="px-4 py-3 text-start text-theme-sm text-gray-500 underline dark:text-gray-400 sm:px-6">
-                    <Link
-                     href={`/chitietdh?id=${orders.orderDetailId._id}`}
-                      className="font-medium text-blue-600 hover:underline dark:text-blue-500"
-                    >
+                  <TableCell className="px-4 py-3 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
                       {orders.uniqueKey}
-                    </Link>
                   </TableCell>
                   <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
-                    <div className="flex -space-x-2">{orders.userId?.name}</div>
+                    <div className="flex -space-x-2">{orders.userId?.firstname || orders.userId?.lastname ? `${orders.userId?.firstname || ''} ${orders.userId?.lastname || ''}`.trim() : orders.userId?.name}</div>
                   </TableCell>
                   <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
                       {format(orders.createdAt, "dd/MM/yyyy HH:mm:ss", {
@@ -178,26 +180,28 @@ export default function Order() {
                         size="sm"
                         color={
                           orders.status === "Processing"
-                            ? "warning" // Màu vàng/cam cho trạng thái đang xử lý
-                            : orders.status === "Shipped"
-                            ? "primary" // Màu xanh dương cho trạng thái đã giao hàng
-                            : orders.status === "Delivered"
-                            ? "success" // Màu xanh lá cây cho trạng thái đã nhận hàng
+                            ? "warning" // Vàng cam - Đang xử lý
+                            : orders.status === "Received"
+                            ? "primary" // Xanh dương - Đã nhận hàng
+                            : orders.status === "Shipping"
+                            ? "info" // Xanh nhạt - Đang giao
+                            : orders.status === "Complete"
+                            ? "success" // Xanh lá cây - Đã hoàn tất
                             : orders.status === "Cancelled"
-                            ? "error" // Màu đỏ cho trạng thái đã hủy
-                            : "primary" // Màu mặc định nếu không khớp với trạng thái nào
+                            ? "error" // Đỏ - Đã hủy
+                            : "error" // Không gán màu nếu không khớp
                         }
+                        
                       >
                         {orders.status}
                       </Badge>
                     </div>
                   </TableCell>
-                  <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
-                    <div className="flex gap-5 -space-x-2">
-                      <Link href={`/chitietdh?id=${orders.orderDetailId._id}`}>
-                        <EyeIcon className="cursor-pointer text-green-500" />
+                  <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6 whitespace-nowrap ">
+                    <div className="flex -space-x-2">
+                      <Link href={`/chitietdh?id=${orders.orderDetailId._id}`} onClick={() => saveId(orders._id)}>
+                        <Button size="xs">Chi tiết</Button>
                       </Link>
-                      <TrashBinIcon className="cursor-pointer" />
                     </div>
                   </TableCell>
                 </TableRow>

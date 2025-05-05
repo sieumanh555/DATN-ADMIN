@@ -43,6 +43,16 @@ const navItems: NavItem[] = [
       { name: "Categories List", path: "/danhmuc", pro: false },
     ],
   },
+  // {
+  //   name: "Forms",
+  //   icon: <ListIcon />,
+  //   subItems: [{ name: "Form Elements", path: "/form-elements", pro: false }],
+  // },
+  // {
+  //   name: "Tables",
+  //   icon: <TableIcon />,
+  //   subItems: [{ name: "Basic Tables", path: "/basic-tables", pro: false }],
+  // },
   {
     name: "Account Management",
     icon: <UserCircleIcon className="h-6 w-6" />,

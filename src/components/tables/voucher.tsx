@@ -7,13 +7,16 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
-import { DocsIcon, TrashBinIcon } from "@/icons";
+import { TrashBinIcon } from "@/icons";
+import Button from "../ui/button/Button";
 
 import Badge from "../ui/badge/Badge";
 // import Image from "next/image";
 
 import { voucherService } from "@/services/voucher_controller";
 import type { Voucher } from "@/model/voucher_model";
+import { format } from "date-fns";
+import { vi } from "date-fns/locale";
 
 export default function Voucher() {
   const [voucher, setVoucher] = useState<Voucher[]>([]);
@@ -21,8 +24,40 @@ export default function Voucher() {
   useEffect(() => {
     voucherService.getAllVoucher().then(setVoucher);
   }, []);
+  const deleteVoucher = async (id: string) => {
+    if (!id) {
+      alert("ID không hợp lệ.");
+      return;
+    }
 
-  console.log(voucher);
+    try {
+      const confirmDelete = confirm("Bạn có chắc muốn xóa sản phẩm này?");
+      if (!confirmDelete) return;
+
+      await voucherService.deleteVoucher(id);
+      alert("Xóa sản phẩm thành công!");
+      window.location.reload();
+    } catch (error) {
+      console.error("Lỗi khi xóa sản phẩm:", error);
+      alert("Xóa sản phẩm thất bại. Vui lòng thử lại.");
+    }
+  };
+
+  const changeStatus = async (id: string) => {
+    try {
+      // Tìm item hiện tại
+      const currentItem = voucher.find((item) => item._id === id);
+      if (!currentItem) return;
+  
+      // Toggle trạng thái
+      const newStatus = currentItem.status === "Hoạt động" ? "Tạm ngưng" : "Hoạt động";
+      const body = { status: newStatus }; 
+      await voucherService.updateVoucher(id, body);
+      window.location.reload();
+    } catch (error) {
+      console.error("Lỗi khi cập nhật trạng thái:", error);
+    }
+  };
   
 
   return (
@@ -49,6 +84,12 @@ export default function Voucher() {
                   isHeader
                   className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
+                  Voucher Name
+                </TableCell>
+                <TableCell
+                  isHeader
+                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
+                >
                   VoucherCode
                 </TableCell>
                 <TableCell
@@ -62,12 +103,6 @@ export default function Voucher() {
                   className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
                   DiscountValue
-                </TableCell>
-                <TableCell
-                  isHeader
-                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
-                >
-                  Description
                 </TableCell>
                 <TableCell
                   isHeader
@@ -91,6 +126,12 @@ export default function Voucher() {
                   isHeader
                   className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
                 >
+                  Switch
+                </TableCell>
+                <TableCell
+                  isHeader
+                  className="px-5 py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
+                >
                   Controller
                 </TableCell>
               </TableRow>
@@ -106,24 +147,24 @@ export default function Voucher() {
                     {items.sku_id}
                   </TableCell>
                   <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
+                    <div className="flex -space-x-2">{items.name}</div>
+                  </TableCell>
+                  <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
                     <div className="flex -space-x-2">{items.code}</div>
                   </TableCell>
                   <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
                     <div className="flex -space-x-2">{items.type}</div>
                   </TableCell>
                   <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
-                    <div className="flex -space-x-2">ABCXYZ</div>
-                  </TableCell>
-                  <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
-                    <div className="flex -space-x-2">ABCXYZ</div>
+                    <div className="flex -space-x-2">{items.value}</div>
                   </TableCell>
                   <TableCell className="px-4 py-3 text-start text-theme-sm text-gray-500 dark:text-gray-400">
                     <Badge
                       size="sm"
                       color={
-                        items.status === "active"
+                        items.status === "Hoạt động"
                           ? "success"
-                          : items.status === "expired"
+                          : items.status === "Tạm ngưng"
                             ? "warning"
                             : "error"
                       }
@@ -132,15 +173,21 @@ export default function Voucher() {
                     </Badge>
                   </TableCell>
                   <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
-                    <div className="flex -space-x-2">ABCXYZ</div>
+                    <div className="flex -space-x-2">                        {format(items.createdAt, "dd/MM/yyyy HH:mm:ss", {
+                                              locale: vi,
+                                            })}</div>
                   </TableCell>
                   <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
-                    <div className="flex -space-x-2">ABCXYZ</div>
+                    <div className="flex -space-x-2">                        {format(items.updatedAt, "dd/MM/yyyy HH:mm:ss", {
+                                              locale: vi,
+                                            })}</div>
+                  </TableCell>
+                  <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
+                    <div className="flex -space-x-2"><Button  onClick={() => changeStatus(items._id)} size="xs">Ẩn/Hiện</Button></div>
                   </TableCell>
                   <TableCell className="px-5 py-4 text-start text-theme-sm text-gray-500 dark:text-gray-400 sm:px-6">
                     <div className="flex gap-5 -space-x-2">
-                      <DocsIcon className="cursor-pointer text-green-500" />
-                      <TrashBinIcon className="cursor-pointer" />
+                      <TrashBinIcon onClick={() => deleteVoucher(items._id)} className="cursor-pointer" />
                     </div>
                   </TableCell>
                 </TableRow>

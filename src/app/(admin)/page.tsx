@@ -10,11 +10,13 @@ import RecentOrders from "@/components/ecommerce/RecentOrders";
 import { useProduct_Data } from "@/components/ecommerce_client/financial";
 import RecentOrders1 from "@/components/ecommerce/RecentOrder1";
 import RecentUser from "@/components/ecommerce/RecentUser";
+import DailyTarget from "@/components/ecommerce/DailyTarget";
+import PaymentTarget from "@/components/ecommerce/PaymentTarget copy";
 
 
 
 export default function Ecommerce() {
-  const { product, user, newuser, voucher, category, order, orderfailed, ordertoday } = useProduct_Data();
+  const { product, user, newuser, voucher, category, order, orderfailed, ordertoday, ordertotal, ordertotaltoday } = useProduct_Data();
   const totalProduct = product.length;
   const totalUser = user.length;
   const totalNewuser = newuser.length;
@@ -23,6 +25,10 @@ export default function Ecommerce() {
   const totalOrder = order.length;
   const totalorderfailed = orderfailed.length
   const totalordertoday = ordertoday.length;
+  const totalRevenue = ordertotal.length > 0 ? ordertotal[0].totalRevenue : 0;
+  
+  const totalDayRevenue = ordertotaltoday.length > 0 ? ordertotaltoday[0].totalRevenue : 0;
+  
   
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-12 md:gap-6">
@@ -72,12 +78,12 @@ export default function Ecommerce() {
     />
   </div>
   <div className="col-span-1 md:col-span-2 lg:col-span-6 space-y-6">
-    <MonthlyTarget name1="Tổng doanh thu COD" />
-    <MonthlyTarget name1="Tổng doanh thu ATM/Transfer/Payment" />
+    <PaymentTarget name1="Tổng doanh thu COD" />
+    <PaymentTarget name1="Tổng doanh thu ATM/Transfer/Payment" />
   </div>
   <div className="col-span-1 md:col-span-2 lg:col-span-6 space-y-6">
-    <MonthlyTarget name1="Doanh thu tổng" />
-    <MonthlyTarget name1="Tổng doanh thu 1 ngày" />
+    <MonthlyTarget name1="Doanh thu tổng" total={totalRevenue} />
+    <DailyTarget name1="Tổng doanh thu 1 ngày" total={totalDayRevenue}/>
   </div>
   {/* <div className="col-span-12">
         <StatisticsChart />

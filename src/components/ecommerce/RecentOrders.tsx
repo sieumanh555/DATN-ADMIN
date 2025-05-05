@@ -128,6 +128,12 @@ export default function RecentOrders(props: RecentOrdersProps) {
                 isHeader
                 className="py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
               >
+                Created Date
+              </TableCell>
+              <TableCell
+                isHeader
+                className="py-3 text-start text-theme-xs font-medium text-gray-500 dark:text-gray-400"
+              >
                 Status
               </TableCell>
             </TableRow>
@@ -168,7 +174,7 @@ export default function RecentOrders(props: RecentOrdersProps) {
                   <Badge
                     size="sm"
                     color={
-                      order.status === "Delivered"
+                      order.status === "Complete"
                         ? "success"
                         : order.status === "Processing"
                           ? "warning"

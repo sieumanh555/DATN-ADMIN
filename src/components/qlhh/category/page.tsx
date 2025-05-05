@@ -52,8 +52,8 @@ export default function Category() {
   };
 
   const options = [
-    { value: "Hoạt động", label: "Hoạt động" },
-    { value: "Không hoạt động", label: "Không hoạt động" },
+    { value: "Còn hàng", label: "Còn hàng" },
+    { value: "Chờ hàng", label: "Chờ hàng" },
   ];
 
   return (

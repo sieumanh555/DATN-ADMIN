@@ -1,6 +1,7 @@
 export interface User {
   userID: string;
-  name: string;
+  firstname: string;
+  lastname: string;
 }
 
 export interface ProductInfo {
@@ -10,7 +11,7 @@ export interface ProductInfo {
 
 export interface Comments {
   _id: string;
-  sku_id: string;
+  sky_id: string;
   user: User;
   product: ProductInfo;
   content: string;

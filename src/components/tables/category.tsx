@@ -111,9 +111,9 @@ export default function Categories() {
                       <Badge
                         size="sm"
                         color={
-                          items.status === "active"
+                          items.status === "Còn hàng"
                             ? "success"
-                            : items.status === "unactive"
+                            : items.status === "Chờ hàng"
                               ? "warning"
                               : "error"
                         }

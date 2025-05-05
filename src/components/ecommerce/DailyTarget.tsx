@@ -22,8 +22,8 @@ const formatCurrency = (price?: number) => {
     currency: "VND",
   });
 };
-export default function MonthlyTarget(props: MonthlyTargetProps) {
-  const totalTarget = Number(100000000 - props.total)
+export default function DailyTarget(props: MonthlyTargetProps) {
+  const totalTarget = Number(7000000 - props.total)
   const percent = (props.total / 100000000) * 100;
   const series = [percent]; // hoặc [percent, 100 - percent] nếu dùng biểu đồ donut/pie
   const options: ApexOptions = {
@@ -148,7 +148,7 @@ export default function MonthlyTarget(props: MonthlyTargetProps) {
             Target một tháng
           </p>
           <p className="flex items-center justify-center gap-1 text-base font-semibold text-gray-800 dark:text-white/90 sm:text-lg">
-          {formatCurrency(100000000)}
+          {formatCurrency(7000000)}
           </p>
         </div>
         <div className="h-7 w-px bg-gray-200 dark:bg-gray-800"></div>
@@ -158,7 +158,7 @@ export default function MonthlyTarget(props: MonthlyTargetProps) {
             Revenue
           </p>
           <p className="flex items-center justify-center gap-1 text-base font-semibold text-gray-800 dark:text-white/90 sm:text-lg">
-            {formatCurrency(props.total)}
+            {props.total}
             <svg
               width="16"
               height="16"

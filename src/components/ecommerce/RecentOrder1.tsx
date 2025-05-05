@@ -168,7 +168,7 @@ export default function RecentOrders1(props: RecentOrdersProps) {
                   <Badge
                     size="sm"
                     color={
-                      order.status === "Delivered"
+                      order.status === "Complete"
                         ? "success"
                         : order.status === "Processing"
                           ? "warning"

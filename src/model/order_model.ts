@@ -15,7 +15,8 @@ export interface Order {
     paymentStatus: 'Uncompleted' | 'Completed';
     shipping: number;
     shippingMethod?: string;
-    status: 'Processing' | 'Shipped' | 'Delivered' | 'Cancelled';
+    status: 'Processing' | 'Received' | 'Shipping' | 'Cancelled' | "Complete";
+    totalRevenue: number;
     createdAt: Date;
     updatedAt: Date;
   }

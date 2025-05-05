@@ -1,6 +1,7 @@
 import axios from "axios";
 import type { Order, OrderItem, OrderItemGroup } from "@/model/order_model";
 
+
 const API_URL = "https://datn-api-production.up.railway.app"; // Đổi thành API của bạn
 
 export const orderService = {
@@ -16,9 +17,21 @@ export const orderService = {
     const response = await axios.get(`${API_URL}/order/orderday`);
     return response.data.data;
   },
+  async getOrderTotalToDay(): Promise<Order[]> {
+    const response = await axios.get(`${API_URL}/order/ordertotaladay`);
+    return response.data.data;
+    
+  },
+  async getOrderTotal(): Promise<Order[]> {
+    const response = await axios.get(`${API_URL}/order/ordertotal`);
+    return response.data.data;
+  },
   async getOrderById(id: string): Promise<Order> {
     const response = await axios.get(`${API_URL}/order/${id}`);
-    return response.data;
+    return response.data.data;
+  },
+  async deleteOrder(id: string): Promise<void> {
+    await axios.delete(`${API_URL}/order/${id}`);
   },
   async updateOrder(
     id: string,

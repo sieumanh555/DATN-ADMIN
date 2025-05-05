@@ -115,7 +115,7 @@ export default function RecentUser(props: RecentOrdersProps) {
                   {index + 1}
                 </TableCell>
                 <TableCell className="py-3 text-theme-sm text-gray-500 dark:text-gray-400">
-                  {user.name}
+                  {user.firstname || user.lastname ? `${user.firstname || ''} ${user.lastname || ''}`.trim() : user.name}
                 </TableCell>
                 <TableCell className="py-3 text-theme-sm text-gray-500 dark:text-gray-400">
                   {user.email}

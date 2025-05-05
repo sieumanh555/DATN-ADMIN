@@ -1,35 +1,54 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useModal } from "@/hooks/useModal";
 import { Modal } from "@/components/ui/modal";
 import Button from "@/components/ui/button/Button";
 import Input from "@/components/form/input/InputField";
 import Label from "@/components/form/Label";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
+import type { User } from "@/model/user_model";
+import { userService } from "@/services/user_controller";
 
 export default function UserMetaCard() {
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id");
+  const [employee, setEmployee] = useState<User | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
   const { isOpen, openModal, closeModal } = useModal();
   const handleSave = () => {
     // Handle save logic here
     console.log("Saving changes...");
     closeModal();
   };
+  useEffect(() => {
+      if (!id) return;
+      setLoading(true);
+      userService
+        .getUser(id)
+        .then((response) => setEmployee(response))
+        .catch((error) => console.error("Lỗi khi lấy user:", error))
+        .finally(() => setLoading(false));
+    }, [id]);
+    if (!id) return <p>Không tìm thấy ID sản phẩm</p>;
+  if (loading) return <p>Đang tải...</p>;
+  console.log(employee);
+  
   return (
     <>
       <div className="rounded-2xl border border-gray-200 p-5 dark:border-gray-800 lg:p-6">
         <div className="flex flex-col gap-5 xl:flex-row xl:items-center xl:justify-between">
           <div className="flex w-full flex-col items-center gap-6 xl:flex-row">
             <div className="h-20 w-20 overflow-hidden rounded-full border border-gray-200 dark:border-gray-800">
-              <Image
-                width={80}
-                height={80}
-                src="/images/user/owner.jpg"
-                alt="user"
-              />
+            {employee?.image && (
+                <Image width={80} height={80} src={employee.image} alt="user" />
+              )}
             </div>
             <div className="order-3 xl:order-2">
               <h4 className="mb-2 text-center text-lg font-semibold text-gray-800 dark:text-white/90 xl:text-left">
-                Musharof Chowdhury
+              {employee?.lastname && employee?.firstname
+                  ? `${employee.firstname} ${employee.lastname}`
+                  : employee?.firstname || employee?.lastname || "Chưa có tên"}
               </h4>
               <div className="flex flex-col items-center gap-1 text-center xl:flex-row xl:gap-3 xl:text-left">
                 <p className="text-sm text-gray-500 dark:text-gray-400">
